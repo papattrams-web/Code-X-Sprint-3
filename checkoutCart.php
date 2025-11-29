@@ -14,172 +14,79 @@ if (!isset($_SESSION['user_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f8f9fa;
-            margin: 0;
+        /* Updated navigation bar matching products page style */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .header {
-            background: #1e90ff;
-            color: white;
-            padding: 15px 0;
-        }
-
-        .navbar {
-            max-width: 1200px;
-            margin: 0 auto;
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #0d6efd;
+            text-transform: uppercase;
         }
 
         .nav-links {
-            list-style: none;
             display: flex;
-            gap: 20px;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
             margin: 0;
             padding: 0;
         }
 
         .nav-links a {
-            color: white;
+            color: black;
+            font-weight: 500;
+            transition: color 150ms ease-in-out;
             text-decoration: none;
-            transition: opacity 0.3s;
         }
 
         .nav-links a:hover {
-            opacity: 0.7;
-        }
-
-        .cart-container { 
-            max-width: 900px; 
-            margin: 2rem auto; 
-            padding: 0 1rem; 
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 2rem;
-        }
-
-        .cart-container h1 {
-            color: #333;
-            margin-bottom: 2rem;
-        }
-
-        .cart-item { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            border-bottom: 1px solid #eee; 
-            padding: 1.5rem 0; 
-        }
-
-        .cart-details h4 { 
-            margin: 0 0 0.5rem 0; 
-            color: #333;
-            font-size: 18px;
-        }
-
-        .cart-details span {
-            color: #666;
-        }
-
-        .cart-actions {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .cart-actions strong {
-            color: #1e90ff;
-            font-size: 18px;
-        }
-
-        .btn-remove { 
-            background: #ff4444; 
-            color: white; 
-            border: none; 
-            padding: 8px 16px; 
-            cursor: pointer; 
-            border-radius: 4px;
-            transition: background 0.3s;
-        }
-
-        .btn-remove:hover {
-            background: #cc0000;
-        }
-
-        .cart-summary { 
-            margin-top: 2rem; 
-            text-align: right; 
-            font-size: 1.3rem;
-            padding-top: 1rem;
-            border-top: 2px solid #1e90ff;
-        }
-
-        .cart-summary p {
-            margin: 1rem 0;
-            color: #333;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            background: #1e90ff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.3s;
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .btn:hover {
-            background: #1873cc;
-        }
-
-        .btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
-        .empty-msg { 
-            text-align: center; 
-            margin-top: 3rem; 
-            color: #666; 
-        }
-
-        .empty-msg h3 {
-            margin-bottom: 1.5rem;
-            color: #333;
-        }
-
-        .empty-msg .btn {
-            display: inline-block;
+            color: #0d6efd;
             text-decoration: none;
+        }
+
+        /* Content margin for fixed nav */
+        .content-wrapper {
+            margin-top: 80px;
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <nav class="navbar container">
-            <ul class="nav-links">
-                <li><a href="products.php">Back to Store</a></li>
-                <li><a href="homepage.html">Home</a></li>
-                <li><a href="login.php">Logout</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Navigation bar matching homepage style -->
+    <nav>
+        <div class="logo">Essentials</div>
+        <ul class="nav-links">
+            <li><a href="products.php">Back to Store</a></li>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="login.php">Logout</a></li>
+        </ul>
+    </nav>
 
-    <main class="cart-container">
-        <h1>Your Shopping Cart</h1>
-        
-        <div id="cart-items-container">
-        </div>
+    <div class="content-wrapper">
+        <main class="cart-container">
+            <h1>Your Shopping Cart</h1>
+            
+            <div id="cart-items-container">
+            </div>
 
-        <div id="cart-footer" class="cart-summary" style="display:none;">
-            <p><strong>Total: GHS <span id="cart-total">0.00</span></strong></p>
-            <button onclick="processCheckout()" class="btn" style="margin-top: 1rem;">Confirm & Pay</button>
-        </div>
-    </main>
+            <div id="cart-footer" class="cart-summary" style="display:none;">
+                <p><strong>Total: GHS <span id="cart-total">0.00</span></strong></p>
+                <button onclick="processCheckout()" class="btn" style="margin-top: 1rem;">Confirm & Pay</button>
+            </div>
+        </main>
+    </div>
 
     <script>
         // Load Cart on Page Load
@@ -199,8 +106,12 @@ if (!isset($_SESSION['user_id'])) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
             if (cart.length === 0) {
-                container.innerHTML = '<div class="empty-msg"><h3>Your cart is empty</h3><a href="main.php" class="btn">Go Shopping</a></div>';
+                container.innerHTML = '<div class="empty-msg"><h3>Your cart is empty</h3><a href="products.php" class="btn">Go Shopping</a></div>';
                 footer.style.display = 'none';
+                // Redirect to products page after a short delay
+                setTimeout(function() {
+                    window.location.href = 'products.php';
+                }, 1500);
                 return;
             }
 
@@ -232,6 +143,14 @@ if (!isset($_SESSION['user_id'])) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
             cart.splice(index, 1);
             localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // If cart is now empty, redirect to products page
+            if (cart.length === 0) {
+                setTimeout(function() {
+                    window.location.href = 'products.php';
+                }, 1500);
+            }
+            
             renderCart();
         }
 
@@ -263,7 +182,7 @@ if (!isset($_SESSION['user_id'])) {
                 if (result.success) {
                     alert('Order placed successfully!');
                     localStorage.removeItem('cart');
-                    window.location.href = 'main.php';
+                    window.location.href = 'products.php';
                 } else {
                     alert("Order Failed: " + result.message);
                     btn.disabled = false;
