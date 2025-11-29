@@ -1,0 +1,337 @@
+/* Homepage Stylesheet - Essentials Store */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* CSS Variables - Color scheme and design tokens */
+:root{
+    --accent-color:  #0d6efd;
+    --base-color:white;
+    --text-color:black;
+    --input-color: #dee4ec;
+}
+
+/* Reset - Remove default margins and padding */
+*{
+    margin:0;
+    padding:0;
+}
+
+/* Base HTML styling */
+html{
+    font-family: Poppins, Segoe UI, sans-serif;
+    font-size:12pt ;
+    color:var(--text-color);
+    text-align: center;
+}
+
+/* Body styling */
+body{
+    min-height: 100vh;
+    background-size: cover;
+    background-position: right;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Blue background overlay */
+body::before{
+    content: "";
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background: #0d6efd;
+    z-index: -1;
+}
+
+/* Hide background overlay on homepage */
+body.index-page::before {
+    display: none;
+}
+
+/* Navigation Bar */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--base-color);
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--accent-color);
+    text-transform: uppercase;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 150ms ease-in-out;
+    text-decoration: none;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.nav-btn {
+    border: none;
+    border-radius: 1000px;
+    padding: 0.6em 1.5em;
+    background-color: var(--accent-color);
+    color: var(--base-color);
+    font: inherit;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 150ms ease-in-out;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.nav-btn:hover {
+    background-color: var(--text-color);
+    color: var(--base-color);
+    text-decoration: none;
+}
+
+.nav-btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+}
+
+.nav-btn-outline:hover {
+    background-color: var(--accent-color);
+    color: var(--base-color);
+}
+
+/* Hero Section */
+
+.hero {
+    margin-top: 80px;
+    padding: 4rem 2rem;
+    text-align: center;
+    color: var(--base-color);
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--accent-color);
+    position: relative;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    color: var(--base-color);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.hero-btn {
+    border: none;
+    border-radius: 1000px;
+    padding: 1em 3em;
+    background-color: var(--base-color);
+    color: var(--accent-color);
+    font: inherit;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.hero-btn:hover {
+    background-color: var(--text-color);
+    color: var(--base-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    text-decoration: none;
+}
+
+.hero-btn-secondary {
+    background-color: transparent;
+    border: 2px solid var(--base-color);
+    color: var(--base-color);
+}
+
+.hero-btn-secondary:hover {
+    background-color: var(--base-color);
+    color: var(--accent-color);
+}
+
+/* Content Sections */
+.content-section {
+    background: var(--base-color);
+    padding: 4rem 2rem;
+    position: relative;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    color: var(--accent-color);
+}
+
+/* Products Showcase */
+.products-showcase {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.product-item {
+    background: var(--base-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 150ms ease-in-out, box-shadow 150ms ease-in-out;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+.product-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.product-item-content {
+    padding: 1.5rem;
+}
+
+.product-item h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+/* Button wrapper for View All Products */
+.view-all-wrapper {
+    margin-top: 3rem;
+}
+
+.view-all-wrapper .hero-btn {
+    background-color: var(--accent-color);
+    color: var(--base-color);
+}
+
+/* Footer */
+footer {
+    background: var(--text-color);
+    color: var(--base-color);
+    padding: 3rem 2rem 1rem;
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--base-color);
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+    color: var(--base-color);
+    transition: color 150ms ease-in-out;
+}
+
+.footer-section a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.7);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+}
