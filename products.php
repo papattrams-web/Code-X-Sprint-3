@@ -10,6 +10,7 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
 
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -102,6 +103,7 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
         }
     </style>
 </head>
+
 <body>
     <header class="header">
         <nav class="navbar container">
