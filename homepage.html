@@ -1,70 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width ,initial-scale=1.0"> 
-        <title>HomePage</title>
-        <link rel="stylesheet" href="main.css">
-    </head>
-    <body>
-        <ul>
-            <li><a href="#home" class="active">Home</a></li>
-            <li><a href="products.php">Store</a></li>
-            <li><a href="#News">News</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="login.php">Logins</a></li>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essentials - Your Daily Needs, One Tap Away</title>
+    <link rel="stylesheet" href="homepagestyle.css">
+</head>
+<body class="index-page">
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">Essentials</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="products.php" class="nav-btn-outline">View Store</a></li>
+            <li><a href="login.php" class="nav-btn-outline">Login</a></li>
+            <li><a href="signup.php" class="nav-btn">Sign Up</a></li>
         </ul>
+    </nav>
 
-        <div class="image">
-            <img src="grocery shop.jpg" class="image" img>
-            <div class="overlay"></div>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Essentials</h1>
+        <p>Your Daily Needs, One Tap Away</p>
+        <div class="hero-buttons">
+            <a href="products.php" class="hero-btn">Shop Now</a>
+            <a href="signup.php" class="hero-btn hero-btn-secondary">Get Started</a>
         </div>
+    </section>
 
-        <div class="intro">
-            <h3 >Essentials</h3>
-            <p>Your Daily Needs, One Tap Away</p>
+    <!-- Products Showcase Section -->
+    <section class="content-section" id="products">
+        <h2 class="section-title">Explore Products Tailored to Your Needs</h2>
+        
+        <div class="products-showcase">
+            <div class="product-item">
+                <img src="images/chips.webp" alt="Chips">
+                <div class="product-item-content">
+                    <h4>Snacks</h4>
+                    <p>Delicious snacks to satisfy your cravings</p>
+                </div>
+            </div>
+            
+            <div class="product-item">
+                <img src="images/plantainchips.webp" alt="Plantain Chips">
+                <div class="product-item-content">
+                    <h4>Local Favorites</h4>
+                    <p>Authentic local snacks and treats</p>
+                </div>
+            </div>
+            
+            <div class="product-item">
+                <img src="images/bodylotions.webp" alt="Body Lotions">
+                <div class="product-item-content">
+                    <h4>Toiletries</h4>
+                    <p>Personal care essentials</p>
+                </div>
+            </div>
+            
+            <div class="product-item">
+                <img src="images/notebooks.jpg" alt="Notebooks">
+                <div class="product-item-content">
+                    <h4>Stationery</h4>
+                    <p>Academic and office supplies</p>
+                </div>
+            </div>
+            
+            <div class="product-item">
+                <img src="images/softdrinks.jpg" alt="Soft Drinks">
+                <div class="product-item-content">
+                    <h4>Soft Drinks</h4>
+                    <p>Cold refreshing beverages</p>
+                </div>
+            </div>
         </div>
+        
+        <div class="view-all-wrapper">
+            <a href="products.php" class="hero-btn">View All Products</a>
+        </div>
+    </section>
 
-        <div class="section1">
-            <div class="card">
-                <h3>Simple Functionality</h3>
-                <p>navigation made easy</p>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Essentials</h3>
+                <p>Your Daily Needs, One Tap Away. We're committed to providing you with quality products and excellent service.</p>
             </div>
-
-            <div class="card">
-                <h3>Browse Product Catalog</h3>
-                <p>find your items with a simple search</p>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="products.php">Store</a></li>
+                </ul>
             </div>
-
-            <div class="card">
-                <h3>24/7 Support Centre</h3>
-                <p>Contact us to help resolve any issues or difficulty <br> to help make navigation easier and faster</p>
+            
+            <div class="footer-section">
+                <h3>Account</h3>
+                <ul>
+                    <li><a href="login.php">Login</a></li>
+                    <li><a href="signup.php">Sign Up</a></li>
+                    <li><a href="products.php">My Cart</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: support@essentials.com</p>
+                <p>Phone: +233 549 678 901</p>
+                <p>Available 24/7 for your convenience</p>
             </div>
         </div>
-
-        <p id="para"><strong> Explore products tailored to <br> your needs</strong> </p>
-
-        <div class="items">
-            <div >
-                <h4>Hot Selling</h4>
-                <img src="wheat drink.jpg" class="img1">
-            </div>
-            <div>
-                <h4>Newly added</h4>
-                <img src="choco.jpeg" class="img1">
-            </div>
-            <div>
-                <h4>Affordable prices</h4>
-                <img src="buldak.jpg" class="img1">
-            </div>
-            <div >
-                <h4>Hot Selling</h4>
-                <img src="cooking oil.jpg" class="img1">
-            </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 Essentials. All rights reserved.</p>
         </div>
-
-        <hr>
-
-       
-    </body>
+    </footer>
+</body>
 </html>
