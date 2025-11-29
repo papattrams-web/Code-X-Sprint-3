@@ -50,16 +50,65 @@ $conn->close();
     <meta charset="UTF-8">
     <title>Staff Dashboard</title>
     <link rel="stylesheet" href="main.css">
+    <style>
+        /* Updated navigation bar matching homepage style */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #0d6efd;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: black;
+            font-weight: 500;
+            transition: color 150ms ease-in-out;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover {
+            color: #0d6efd;
+            text-decoration: none;
+        }
+
+        /* Content margin for fixed nav */
+        .content-wrapper {
+            margin-top: 80px;
+        }
+    </style>
 </head>
 <body>
-<header class="header">
-    <nav class="navbar container">
-        <h3>Staff Dashboard</h3>
-        <a href="staff_product_page.php" class="btn">Products View</a>
-        <a href="logout.php" class="btn">Logout</a>
+    <nav>
+        <div class="logo">Essentials - Staff</div>
+        <ul class="nav-links">
+            <li><a href="staff_product_page.php">Products View</a></li>
+            <li><a href="logout.php">Logout</a></li>
+        </ul>
     </nav>
-</header>
-<main class="container" style="padding-top: 2rem;">
+<main class="container content-wrapper" style="padding-top: 2rem;">
     <h1>Add New Product</h1>
     <?php if($msg) echo "<p style='color: green;'>$msg</p>"; ?>
 

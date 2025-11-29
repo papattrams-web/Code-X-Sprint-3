@@ -21,6 +21,54 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
     <title>Store - Essentials (Staff)</title>
     <link rel="stylesheet" href="main.css">
     <style>
+        /* Updated navigation bar matching homepage style */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #0d6efd;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: black;
+            font-weight: 500;
+            transition: color 150ms ease-in-out;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover {
+            color: #0d6efd;
+            text-decoration: none;
+        }
+
+        /* Content margin for fixed nav */
+        .content-wrapper {
+            margin-top: 80px;
+        }
+
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; padding: 20px; }
         .product-card { background: white; border: 1px solid #eee; padding: 15px; border-radius: 12px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .product-card img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 10px;}
@@ -28,16 +76,15 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
     </style>
 </head>
 <body>
-<header class="header">
-    <nav class="navbar container">
-        <h3>Staff View</h3>
+    <nav>
+        <div class="logo">Essentials - Staff</div>
         <ul class="nav-links">
             <li><a href="staff_dashboard.php">List Product</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
     </nav>
-</header>
 
+<div class="content-wrapper">
 <div class="filter-bar">
     <button class="btn btn-outline active" onclick="filterProducts('all')">All</button>
     <button class="btn btn-outline" onclick="filterProducts('Beverages')">Beverages</button>
@@ -63,8 +110,9 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
         </div>
     <?php endforeach; ?>
 </div>
+</div>
 
-<script>
+    <script>
 function filterProducts(category) {
     const items = document.querySelectorAll('.product-card');
     const buttons = document.querySelectorAll('.filter-bar button');
