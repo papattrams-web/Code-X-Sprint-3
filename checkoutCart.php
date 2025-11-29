@@ -14,13 +14,148 @@ if (!isset($_SESSION['user_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
     <style>
-        /* Quick inline styles for the cart layout */
-        .cart-container { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
-        .cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding: 1rem 0; }
-        .cart-details h4 { margin: 0 0 0.5rem 0; }
-        .btn-remove { background: #ff4444; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px; }
-        .cart-summary { margin-top: 2rem; text-align: right; font-size: 1.2rem; }
-        .empty-msg { text-align: center; margin-top: 3rem; color: #666; }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+        }
+
+        .header {
+            background: #1e90ff;
+            color: white;
+            padding: 15px 0;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.7;
+        }
+
+        .cart-container { 
+            max-width: 900px; 
+            margin: 2rem auto; 
+            padding: 0 1rem; 
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 2rem;
+        }
+
+        .cart-container h1 {
+            color: #333;
+            margin-bottom: 2rem;
+        }
+
+        .cart-item { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 1px solid #eee; 
+            padding: 1.5rem 0; 
+        }
+
+        .cart-details h4 { 
+            margin: 0 0 0.5rem 0; 
+            color: #333;
+            font-size: 18px;
+        }
+
+        .cart-details span {
+            color: #666;
+        }
+
+        .cart-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cart-actions strong {
+            color: #1e90ff;
+            font-size: 18px;
+        }
+
+        .btn-remove { 
+            background: #ff4444; 
+            color: white; 
+            border: none; 
+            padding: 8px 16px; 
+            cursor: pointer; 
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .btn-remove:hover {
+            background: #cc0000;
+        }
+
+        .cart-summary { 
+            margin-top: 2rem; 
+            text-align: right; 
+            font-size: 1.3rem;
+            padding-top: 1rem;
+            border-top: 2px solid #1e90ff;
+        }
+
+        .cart-summary p {
+            margin: 1rem 0;
+            color: #333;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            background: #1e90ff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background: #1873cc;
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .empty-msg { 
+            text-align: center; 
+            margin-top: 3rem; 
+            color: #666; 
+        }
+
+        .empty-msg h3 {
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .empty-msg .btn {
+            display: inline-block;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -28,6 +163,7 @@ if (!isset($_SESSION['user_id'])) {
         <nav class="navbar container">
             <ul class="nav-links">
                 <li><a href="products.php">Back to Store</a></li>
+                <li><a href="homepage.html">Home</a></li>
                 <li><a href="login.php">Logout</a></li>
             </ul>
         </nav>
@@ -37,11 +173,11 @@ if (!isset($_SESSION['user_id'])) {
         <h1>Your Shopping Cart</h1>
         
         <div id="cart-items-container">
-            </div>
+        </div>
 
         <div id="cart-footer" class="cart-summary" style="display:none;">
             <p><strong>Total: GHS <span id="cart-total">0.00</span></strong></p>
-            <button onclick="processCheckout()" class="btn" style="margin-top: 1rem;">Confirm & Pay (Simulated)</button>
+            <button onclick="processCheckout()" class="btn" style="margin-top: 1rem;">Confirm & Pay</button>
         </div>
     </main>
 
@@ -58,59 +194,45 @@ if (!isset($_SESSION['user_id'])) {
             
             container.innerHTML = '';
             let total = 0;
-            let itemCount = localStorage.getItem('cart-itemNo') ? parseInt(localStorage.getItem('cart-itemNo')) : 0;
-            let hasItems = false;
 
-            if (itemCount === 0) {
-                container.innerHTML = '<div class="empty-msg"><h3>Your cart is empty</h3><a href="products.php" class="btn">Go Shopping</a></div>';
+            // Get cart from localStorage (JSON format)
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            if (cart.length === 0) {
+                container.innerHTML = '<div class="empty-msg"><h3>Your cart is empty</h3><a href="main.php" class="btn">Go Shopping</a></div>';
                 footer.style.display = 'none';
                 return;
             }
 
-            // Loop through localStorage to find items
-            for (let i = 0; i <= itemCount; i++) {
-                let name = localStorage.getItem('cart-item_' + i + '_name');
-                let price = localStorage.getItem('cart-item_' + i + '_price');
-                let qty = localStorage.getItem('cart-item_' + i + '_quantity');
+            // Loop through cart items
+            cart.forEach((item, index) => {
+                let itemTotal = parseFloat(item.price) * parseInt(item.quantity);
+                total += itemTotal;
 
-                if (name) { // If item exists (wasn't deleted)
-                    hasItems = true;
-                    let itemTotal = parseFloat(price) * parseInt(qty);
-                    total += itemTotal;
-
-                    let html = `
-                        <div class="cart-item" id="item-${i}">
-                            <div class="cart-details">
-                                <h4>${name}</h4>
-                                <span>GHS ${price} x ${qty}</span>
-                            </div>
-                            <div class="cart-actions">
-                                <strong>GHS ${itemTotal.toFixed(2)}</strong>
-                                <button class="btn-remove" onclick="removeItem(${i})">Remove</button>
-                            </div>
+                let html = `
+                    <div class="cart-item" id="item-${index}">
+                        <div class="cart-details">
+                            <h4>${item.name}</h4>
+                            <span>GHS ${parseFloat(item.price).toFixed(2)} x ${item.quantity}</span>
                         </div>
-                    `;
-                    container.innerHTML += html;
-                }
-            }
+                        <div class="cart-actions">
+                            <strong>GHS ${itemTotal.toFixed(2)}</strong>
+                            <button class="btn-remove" onclick="removeItem(${index})">Remove</button>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += html;
+            });
 
-            if (!hasItems) {
-                container.innerHTML = '<div class="empty-msg"><h3>Your cart is empty</h3><a href="products.php" class="btn">Go Shopping</a></div>';
-                footer.style.display = 'none';
-                // Reset counter if truly empty
-                localStorage.setItem('cart-itemNo', 0);
-            } else {
-                footer.style.display = 'block';
-                totalEl.textContent = total.toFixed(2);
-                localStorage.setItem('orderTotal', total.toFixed(2)); // Save for checkout page
-            }
+            footer.style.display = 'block';
+            totalEl.textContent = total.toFixed(2);
         }
 
         function removeItem(index) {
-            localStorage.removeItem('cart-item_' + index + '_name');
-            localStorage.removeItem('cart-item_' + index + '_price');
-            localStorage.removeItem('cart-item_' + index + '_quantity');
-            renderCart(); // Re-render to update view
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
         }
 
         async function processCheckout() {
@@ -118,42 +240,30 @@ if (!isset($_SESSION['user_id'])) {
             btn.textContent = "Processing...";
             btn.disabled = true;
 
-            // 1. Gather Cart Data from LocalStorage
-            let orderItems = [];
-            let itemCount = localStorage.getItem('cart-itemNo') ? parseInt(localStorage.getItem('cart-itemNo')) : 0;
+            // Get cart data
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-            for (let i = 0; i <= itemCount; i++) {
-                let id = localStorage.getItem('cart-item_' + i + '_id');
-                let qty = localStorage.getItem('cart-item_' + i + '_quantity');
-                
-                // Only add if the item exists (wasn't deleted)
-                if (id && qty) {
-                    orderItems.push({
-                        id: parseInt(id),
-                        quantity: parseInt(qty)
-                    });
-                }
-            }
-
-            if (orderItems.length === 0) {
+            if (cart.length === 0) {
                 alert("Cart is empty!");
                 btn.disabled = false;
+                btn.textContent = "Confirm & Pay";
                 return;
             }
 
-            // 2. Send Data to PHP Backend
+            // Send to backend
             try {
                 let response = await fetch('process_order.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ items: orderItems })
+                    body: JSON.stringify({ cart: cart })
                 });
 
                 let result = await response.json();
 
                 if (result.success) {
-                    // 3. If DB update worked, redirect to receipt
-                    window.location.href = 'checkout.php';
+                    alert('Order placed successfully!');
+                    localStorage.removeItem('cart');
+                    window.location.href = 'main.php';
                 } else {
                     alert("Order Failed: " + result.message);
                     btn.disabled = false;
@@ -163,13 +273,9 @@ if (!isset($_SESSION['user_id'])) {
                 console.error(error);
                 alert("Network Error");
                 btn.disabled = false;
+                btn.textContent = "Confirm & Pay";
             }
         }
-        
-        window.onload = function() {
-            renderCart();
-        };
-
     </script>
 </body>
 </html>
