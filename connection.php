@@ -11,10 +11,10 @@ $conn = new mysqli(
    */
    $servername="localhost";
    $username="root";
-   $password="";
+   $dbpassword="";
    $dbname="essentials";
 
-   $conn=new mysqli($servername,$username,$password,$dbname);
+   $conn=new mysqli($servername,$username,$dbpassword,$dbname);
    
    // Check connection
    if ($conn->connect_error) {
