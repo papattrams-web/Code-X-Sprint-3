@@ -27,7 +27,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <header class="header">
         <nav class="navbar container">
             <ul class="nav-links">
-                <li><a href="homepage.html">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="checkoutCart.php">Cart (<span id="cart-count">0</span>)</a></li>
                 <li><a href="login.php">Logout</a></li>
             </ul>
