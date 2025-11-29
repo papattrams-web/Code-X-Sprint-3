@@ -1,0 +1,55 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Set JSON header
+header("Content-Type: application/json");
+
+// Get the raw POST data from JS
+$data = json_decode(file_get_contents("php://input"), true);
+
+// Check if data exists
+if (!$data) {
+    echo json_encode(["status" => "error", "message" => "No data received"]);
+    exit;
+}
+
+// Extract and sanitize values
+$firstname = trim($data["f_name"] ?? '');
+$lastname  = trim($data["l_name"] ?? '');
+$email     = trim($data["email"] ?? '');
+$password  = trim($data["password"] ?? '');
+
+// Validate required fields
+if (!$firstname || !$lastname || !$email || !$password) {
+    echo json_encode(["status" => "error", "message" => "All fields are required"]);
+    exit;
+}
+
+// Hash the password
+$h_password = password_hash($password, PASSWORD_DEFAULT);
+
+// Connect to the database
+require("connection.php");
+if ($conn->connect_error) {
+    echo json_encode(["status" => "error", "message" => "DB Connection failed: " . $conn->connect_error]);
+    exit;
+}
+
+// Prepare and execute insert query
+$stmt = $conn->prepare("INSERT INTO users (firstName, lastName,email, acc_password) VALUES (?, ?, ?, ?)");
+$stmt->bind_param("ssss", $firstname, $lastname, $email, $h_password);
+
+if ($stmt->execute()) {
+    echo json_encode(["status" => "success", "message" => "Your account has been created!"]);
+} else {
+    echo json_encode(["status" => "error", "message" => "Failed to create account. Email might exist"]);
+}
+
+$stmt->close();
+$conn->close();
+?>
+
+
+
