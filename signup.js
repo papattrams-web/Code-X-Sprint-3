@@ -59,7 +59,7 @@ async function Validate(event){
 
             // Redirect after 2 seconds
             setTimeout(() => {
-                window.location.href = "login.php";
+                window.location.href = "products.php";
             }, 2000);
 
         } else {

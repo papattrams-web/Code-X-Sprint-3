@@ -1,12 +1,10 @@
 <?php
-// update_quantity.php
 session_start();
-require_once __DIR__ . '/confi.php';
-
+require_once __DIR__ . '/connection.php';
 header('Content-Type: application/json');
 
 // 1. Check if user is staff
-if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'staff') {
+if (!isset($_SESSION['user_id']) || $_SESSION['usertype'] !== 'staff') {
     echo json_encode(['success' => false, 'message' => 'Unauthorized']);
     exit();
 }
@@ -17,24 +15,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $qty = $_POST['quantity'] ?? null;
 
     if ($id && $qty !== null) {
-        $database = new Database();
-        $conn = $database->getConnection();
+        // Using $conn from connection.php (assumes MySQLi)
+        $stmt = $conn->prepare("UPDATE Products SET quantity = ? WHERE productID = ?");
+        $stmt->bind_param("ii", $qty, $id);
 
-        try {
-            // 3. Update Database
-            $query = "UPDATE Products SET quantity = :qty WHERE productID = :id";
-            $stmt = $conn->prepare($query);
-            $stmt->bindParam(':qty', $qty);
-            $stmt->bindParam(':id', $id);
-
-            if ($stmt->execute()) {
-                echo json_encode(['success' => true]);
-            } else {
-                echo json_encode(['success' => false, 'message' => 'Database update failed']);
-            }
-        } catch (PDOException $e) {
-            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        if ($stmt->execute()) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Database update failed']);
         }
+
+        $stmt->close();
+        $conn->close();
     } else {
         echo json_encode(['success' => false, 'message' => 'Invalid input']);
     }

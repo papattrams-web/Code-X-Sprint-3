@@ -37,8 +37,7 @@ document.getElementById("login-button").addEventListener("click", async function
             });
 
             setTimeout(() => {
-               // window.location.href = "login.js";
-               window.location.href = "products.php"; 
+               window.location.href = result.redirect; 
             }, 1500);
         } else {
             Swal.fire({ title: "Login Failed", text: "Invalid credentials", icon: "error" });
@@ -48,3 +47,4 @@ document.getElementById("login-button").addEventListener("click", async function
         Swal.fire({ title: "Error", text: "Server error occurred", icon: "error" });
     }
 });
+
