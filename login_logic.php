@@ -30,7 +30,7 @@ if ($conn->connect_error) {
 }
 
 //selecting userid,firstname,lastname and password from database
-$stmt = $conn->prepare("SELECT userID,firstName, lastName, acc_password FROM users WHERE TRIM(email)=?");
+$stmt = $conn->prepare("SELECT userID,firstName, lastName, acc_password,userType FROM users WHERE TRIM(email)=?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 
@@ -43,7 +43,7 @@ if ($stmt->num_rows == 0) {
     exit;
 }
 
-$stmt->bind_result($user_id, $first_name, $last_name, $hash);
+$stmt->bind_result($user_id, $first_name, $last_name,$hash,$user_type);
 $stmt->fetch();
 
 
@@ -51,6 +51,9 @@ if (password_verify($input_password, $hash)) {
     // store user id and username session variables
     $_SESSION['user_id'] = $user_id;
     $_SESSION['username'] = $first_name . " " . $last_name;
+    $_SESSION['usertype']=$user_type;
+
+    $redirect=($user_type==='staff')?"staff_dashboard.php":"products.php";
 
     if ($remember) {
         // set cookie for 30 days
@@ -63,7 +66,8 @@ if (password_verify($input_password, $hash)) {
     echo json_encode([
         "success" => true,
         "username" => $_SESSION['username'],
-        "user_id" => $_SESSION['user_id']
+        "user_id" => $_SESSION['user_id'],
+        "redirect" => $redirect
     ]);
 } else {
     echo json_encode(["success" => false, "message" => "Incorrect password. Try again."]);

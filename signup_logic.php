@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 // Set JSON header
 header("Content-Type: application/json");
 
@@ -39,7 +39,15 @@ $stmt = $conn->prepare("INSERT INTO users (firstName, lastName,email, acc_passwo
 $stmt->bind_param("ssss", $firstname, $lastname, $email, $h_password);
 
 if ($stmt->execute()) {
+
+    $user_id=$conn->insert_id;
+    $_SESSION['user_id'] = $user_id;
+    $_SESSION['username'] = $firstname . " " . $lastname;
+    $_SESSION['user_type']="customer";
+
     echo json_encode(["status" => "success", "message" => "Your account has been created!"]);
+
+
 } else {
     echo json_encode(["status" => "error", "message" => "Failed to create account. Email might exist"]);
 }
