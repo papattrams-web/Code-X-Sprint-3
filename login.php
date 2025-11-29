@@ -1,21 +1,27 @@
-<!-- login webpage -->
+<!-- Login Page - Users sign in to their existing account -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Basic page setup -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Login Page</title>
+    <!-- Using the authentication stylesheet which has the blue background and form styling -->
     <link rel="stylesheet" href="authentication.css">
    
 </head>
 <body>
-   
+    <!-- White card container centered on the blue background -->
     <div class = "wrapper">
+        <!-- Large heading at the top -->
         <h1>Login</h1>
     
+        <!-- Form that collects user login credentials -->
         <form id = "form" novalidate>  
-             <p id ="error-message"></p>
+            <!-- Hidden error message that shows up if login fails -->
+            <p id ="error-message"></p>
            
+            <!-- Email input field with @ icon in the blue label -->
             <div>
                 <label for = "email-input">
                     <span>@</span> 
@@ -23,26 +29,33 @@
                 <input type ="email" required name ="email" id ="email-input" placeholder="Email" />
             </div>
 
+            <!-- Password input field with lock icon in the blue label -->
             <div>
                 <label for ="password-input">
+                    <!-- Lock icon SVG - the icon that appears in the blue label box -->
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill=black><path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm240-200q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80Z"/></svg>
                 </label>
                 <input type ="password" required name="password" id ="password-input" placeholder="Password" />
             </div>
 
+            <!-- Remember me checkbox - lets users stay logged in -->
             <div class="remember-me-container">
                 <input type="checkbox" name="remember_me" id="remember-me-checkbox" />
                 <label for="remember-me-checkbox">Remember Me</label>
-            </div>
+            </div>
             
+            <!-- Submit button - triggers the login process via JavaScript -->
             <button type="button" id="login-button" >Log In</button>
 
+            <!-- Link to signup page for users who don't have an account yet -->
             <p>Don't have an account? <a href="signup.php"> Register</a></p>
         
         </form>
     </div>
 
+    <!-- SweetAlert library for nice popup messages -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Our custom JavaScript that handles the login logic -->
     <script  src="login.js" defer></script>
 
 </body>
