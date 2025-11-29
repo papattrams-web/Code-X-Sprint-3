@@ -5,6 +5,7 @@ document.getElementById("login-button").addEventListener("click", async function
     let password = document.getElementById("password-input").value.trim();
     let remember = document.getElementById("remember-me-checkbox").checked;
 
+
     if (!email || !password) {
         Swal.fire({ title: "Missing Information", text: "Please fill in all fields.", icon: "warning" });
         return;
@@ -24,6 +25,7 @@ document.getElementById("login-button").addEventListener("click", async function
         });
 
         let result = await response.json();
+        console.log(result);
 
         if (result.success) {
             Swal.fire({
@@ -36,7 +38,7 @@ document.getElementById("login-button").addEventListener("click", async function
 
             setTimeout(() => {
                // window.location.href = "login.js";
-               window.location.href = "a_homepage.html"; 
+               window.location.href = "products.php"; 
             }, 1500);
         } else {
             Swal.fire({ title: "Login Failed", text: "Invalid credentials", icon: "error" });
