@@ -14,7 +14,7 @@ if (!isset($_SESSION['user_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
     <style>
-        /* Updated navigation bar matching products page style */
+        /* Updated navigation bar to match the products page style */
         nav {
             position: fixed;
             top: 0;
@@ -62,6 +62,9 @@ if (!isset($_SESSION['user_id'])) {
             margin-top: 80px;
         }
     </style>
+
+
+
 </head>
 <body>
     <!-- Navigation bar matching homepage style -->
@@ -106,12 +109,8 @@ if (!isset($_SESSION['user_id'])) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
             if (cart.length === 0) {
-                container.innerHTML = '<div class="empty-msg"><h3>Your cart is empty</h3><a href="products.php" class="btn">Go Shopping</a></div>';
+                container.innerHTML = '<div class="empty-msg"><h3>Your cart is empty</h3><a href="products.php" class="btn">Go Back To Shopping</a></div>';
                 footer.style.display = 'none';
-                // Redirect to products page after a short delay
-                setTimeout(function() {
-                    window.location.href = 'products.php';
-                }, 1500);
                 return;
             }
 
@@ -143,14 +142,6 @@ if (!isset($_SESSION['user_id'])) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
             cart.splice(index, 1);
             localStorage.setItem('cart', JSON.stringify(cart));
-            
-            // If cart is now empty, redirect to products page
-            if (cart.length === 0) {
-                setTimeout(function() {
-                    window.location.href = 'products.php';
-                }, 1500);
-            }
-            
             renderCart();
         }
 
