@@ -1,57 +1,49 @@
-<?php
-session_start();
-require_once 'confi.php';
-
-if($_SERVER["REQUEST_METHOD"] == "POST") {
-    $database = new Database();
-    $conn = $database->getConnection();
-    
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-
-    $query = "SELECT userID, username, email, acc_password, userType FROM Users WHERE email = :email";
-    $stmt = $conn->prepare($query);
-    $stmt->bindParam(':email', $email);
-    $stmt->execute();
-
-    if($stmt->rowCount() == 1) {
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        if(password_verify($password, $user['acc_password'])) {
-            $_SESSION['user_id'] = $user['userID'];
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['user_type'] = $user['userType'];
-
-            // Redirection Logic
-            if($user['userType'] === 'staff') {
-                header("Location: staff_dashboard.php");
-            } else {
-                header("Location: products.php");
-            }
-            exit();
-        } else {
-            $error = "Invalid password";
-        }
-    } else {
-        $error = "User not found";
-    }
-}
-?>
+<!-- login webpage -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Login</title>
-    <link rel="stylesheet" href="main.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="authentication.css">
+   
 </head>
-<body class="auth-body">
-    <div class="mainCard">
-        <form method="POST" class="card">
-            <h2>Login</h2> 
-            <?php if(isset($error)) echo "<p style='color:red'>$error</p>"; ?>
-            <input type="email" name="email" placeholder="Email" class="input" required>
-            <input type="password" name="password" placeholder="Password" class="input" required>
-            <button type="submit">Login</button>
-            <p id="paragraph">Don't have an account? <a href="signup.php">Signup</a></p>
+<body>
+   
+    <div class = "wrapper">
+        <h1>Login</h1>
+    
+        <form id = "form" novalidate>  
+             <p id ="error-message"></p>
+           
+            <div>
+                <label for = "email-input">
+                    <span>@</span> 
+                </label>
+                <input type ="email" required name ="email" id ="email-input" placeholder="Email" />
+            </div>
+
+            <div>
+                <label for ="password-input">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill=black><path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm240-200q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80Z"/></svg>
+                </label>
+                <input type ="password" required name="password" id ="password-input" placeholder="Password" />
+            </div>
+
+            <div class="remember-me-container">
+                <input type="checkbox" name="remember_me" id="remember-me-checkbox" />
+                <label for="remember-me-checkbox">Remember Me</label>
+            </div>
+            
+            <button type="button" id="login-button" >Log In</button>
+
+            <p>Don't have an account? <a href="signup.php"> Register</a></p>
+        
         </form>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script  src="login.js" defer></script>
+
 </body>
 </html>
