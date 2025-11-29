@@ -20,131 +20,98 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
     <title>Store - Essentials</title>
     <link rel="stylesheet" href="main.css">
     <style>
-        /* Simple Grid for Products */
-        .product-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
-            gap: 20px; 
-            padding: 20px; 
-        }
-        .product-card { 
-            border: 1px solid #ddd; 
-            padding: 10px; 
-            border-radius: 8px; 
-            text-align: center; 
-            transition: transform 0.3s;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        .product-card img { 
-            width: 100%; 
-            height: 150px; 
-            object-fit: cover; 
-            border-radius: 4px;
-            margin-bottom: 10px;
-        }
-        .filter-bar { 
-            padding: 20px; 
-            display: flex; 
-            gap: 10px; 
-            justify-content: center; 
-            flex-wrap: wrap;
-        }
-        .filter-btn { 
-            padding: 8px 16px; 
-            cursor: pointer; 
-            background: #ddd; 
-            border: none; 
-            border-radius: 4px; 
-            transition: all 0.3s;
-        }
-        .filter-btn.active { 
-            background: #1e90ff; 
-            color: white; 
-        }
-        .filter-btn:hover {
-            background: #1873cc;
-            color: white;
-        }
-        .btn {
-            padding: 8px 16px;
-            background: #1e90ff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .btn:hover {
-            background: #1873cc;
-        }
-        .header {
-            background: #1e90ff;
-            color: white;
-            padding: 15px 0;
-        }
-        .navbar {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .nav-links {
-            list-style: none;
+        /* Updated navigation bar matching homepage style */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
             display: flex;
-            gap: 20px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #0d6efd;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
             margin: 0;
             padding: 0;
         }
+
         .nav-links a {
-            color: white;
+            color: black;
+            font-weight: 500;
+            transition: color 150ms ease-in-out;
             text-decoration: none;
-            transition: opacity 0.3s;
         }
+
         .nav-links a:hover {
-            opacity: 0.7;
+            color: #0d6efd;
+            text-decoration: none;
+        }
+
+        /* Content margin for fixed nav */
+        .content-wrapper {
+            margin-top: 80px;
         }
     </style>
 </head>
 
 <body>
-    <header class="header">
-        <nav class="navbar container">
-            <ul class="nav-links">
-                <li><a href="homepage.html">Home</a></li>
-                <li><a href="checkoutCart.php">Cart (<span id="cart-count">0</span>)</a></li>
-                <li><a href="login.php">Logout</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Navigation bar matching homepage style -->
+    <nav>
+        <div class="logo">Essentials</div>
+        <ul class="nav-links">
+            <li><a href="index.php">Home</a></li>
+            <li><a href="checkoutCart.php">Cart (<span id="cart-count">0</span>)</a></li>
+            <li><a href="login.php">Logout</a></li>
+        </ul>
+    </nav>
 
-    <div class="filter-bar">
-        <button class="filter-btn active" onclick="filterProducts('all')">All</button>
-        <button class="filter-btn" onclick="filterProducts('Food')">Food</button>
-        <button class="filter-btn" onclick="filterProducts('Beverages')">Beverages</button>
-        <button class="filter-btn" onclick="filterProducts('Snacks')">Snacks</button>
-        <button class="filter-btn" onclick="filterProducts('Toiletries')">Toiletries</button>
-    </div>
+    <div class="content-wrapper">
+        <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterProducts('all')">All</button>
+            <button class="filter-btn" onclick="filterProducts('Food')">Food</button>
+            <button class="filter-btn" onclick="filterProducts('Beverages')">Beverages</button>
+            <button class="filter-btn" onclick="filterProducts('Snacks')">Snacks</button>
+            <button class="filter-btn" onclick="filterProducts('Toiletries')">Toiletries</button>
+        </div>
 
-    <div class="product-grid">
-        <?php if (empty($products)): ?>
-            <p style="grid-column: 1/-1; text-align: center; padding: 40px;">
-                No products found. Please add products to your database.
-            </p>
-        <?php else: ?>
-            <?php foreach($products as $p): ?>
-                <div class="product-card" data-category="<?php echo htmlspecialchars($p['category']); ?>">
-                    <img src="<?php echo htmlspecialchars($p['image_url']); ?>" 
-                         alt="<?php echo htmlspecialchars($p['productName']); ?>"
-                         onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
-                    <h3><?php echo htmlspecialchars($p['productName']); ?></h3>
-                    <p>GHS <?php echo number_format($p['price'], 2); ?></p>
-                    <button class="btn" onclick="addToCart(<?php echo $p['productID']; ?>, '<?php echo htmlspecialchars($p['productName'], ENT_QUOTES); ?>', <?php echo $p['price']; ?>)">
-                        Add to Cart
-                    </button>
-                </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
+        <div class="container">
+            <div class="product-grid">
+            <?php if (empty($products)): ?>
+                <p style="grid-column: 1/-1; text-align: center; padding: 40px;">
+                    No products found. Please add products to your database.
+                </p>
+            <?php else: ?>
+                <?php foreach($products as $p): ?>
+                    <div class="product-card" data-category="<?php echo htmlspecialchars($p['category']); ?>">
+                        <img src="<?php echo htmlspecialchars($p['image_url']); ?>" 
+                             alt="<?php echo htmlspecialchars($p['productName']); ?>"
+                             onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
+                        <h3><?php echo htmlspecialchars($p['productName']); ?></h3>
+                        <p>GHS <?php echo number_format($p['price'], 2); ?></p>
+                        <button class="btn" onclick="addToCart(<?php echo $p['productID']; ?>, '<?php echo htmlspecialchars($p['productName'], ENT_QUOTES); ?>', <?php echo $p['price']; ?>)">
+                            Add to Cart
+                        </button>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            </div>
+        </div>
     </div>
 
     <script>
