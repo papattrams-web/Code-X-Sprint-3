@@ -38,7 +38,7 @@ document.getElementById("login-button").addEventListener("click", async function
 
             setTimeout(() => {
                // window.location.href = "login.js";
-               window.location.href = "homepage.html"; 
+               window.location.href = "products.php"; 
             }, 1500);
         } else {
             Swal.fire({ title: "Login Failed", text: "Invalid credentials", icon: "error" });
