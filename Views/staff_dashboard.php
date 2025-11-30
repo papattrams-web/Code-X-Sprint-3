@@ -217,6 +217,6 @@ input:focus, textarea:focus, select:focus {
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script  src="staff_logout.js" defer></script>
+<script  src="../js/logout.js" defer></script>
 </body>
 </html>

@@ -55,7 +55,7 @@
 
     <!-- SweetAlert library for nice popup messages -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script  src="login.js" defer></script>
+    <script  src="../Views/login.js" defer></script>
 
 </body>
 </html>

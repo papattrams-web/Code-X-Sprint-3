@@ -73,7 +73,7 @@
 <!-- SweetAlert library for nice popup notifications -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- Custom JavaScript that handles form validation and signup logic -->
-<script src="signup.js" defer></script>
+<script src="../Views/signup.js" defer></script>
    
 </body>
 </html>
