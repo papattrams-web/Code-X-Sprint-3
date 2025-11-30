@@ -107,7 +107,7 @@ INSERT INTO Products (productName, info, price, quantity, category, image_url) V
 ('Instant Noodles', 'Quick instant noodles', 3.50, 80, 'Groceries', 'images/buldak.jpg'),
 ('Pasta', 'Spaghetti pasta', 7.00, 45, 'Groceries', 'images/pasta.jpg.jpg'),
 ('Rice 1kg', 'Long grain rice', 12.00, 50, 'Groceries', 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&h=300&fit=crop'),
-('Cereal', 'Breakfast cereal', 15.00, 30, 'Groceries', 'https://images.unsplash.com/photo-1526318896980-cf78c088247c?w=400&h=300&fit=crop'),
+('Cereal', 'Breakfast cereal', 15.00, 30, 'Groceries', 'images/cornflakes.jpg.jpg'),
 ('Oats', 'Rolled oats', 10.00, 25, 'Groceries', 'images/oats.jpg.jpg'),
 ('Flour 1kg', 'All-purpose flour', 8.00, 40, 'Groceries', 'images/flour.jpg.jpg'),
 ('Sugar 1kg', 'Granulated sugar', 6.50, 50, 'Groceries', 'images/sugar.jpg.jpg'),
