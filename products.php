@@ -6,10 +6,38 @@ if(!isset($_SESSION['user_id']) || ($_SESSION['user_type'] ?? '') !== 'customer'
 require_once 'connection.php';
 
 // Fetch products using MySQLi (not PDO)
-$stmt = $conn->prepare("SELECT * FROM Products");
-$stmt->execute();
-$result = $stmt->get_result();
-$products = $result->fetch_all(MYSQLI_ASSOC);
+$products = [];
+
+// Enable exception mode for better error handling
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
+try {
+    $stmt = $conn->prepare("SELECT * FROM Products");
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $products = $result->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+} catch (Exception $e) {
+    // Table doesn't exist, create it
+    $createTable = "CREATE TABLE IF NOT EXISTS Products (
+        productID INT AUTO_INCREMENT PRIMARY KEY,
+        productName VARCHAR(255) NOT NULL,
+        info TEXT,
+        price DECIMAL(10, 2) NOT NULL,
+        quantity INT NOT NULL DEFAULT 0,
+        category VARCHAR(50) NOT NULL,
+        image_url VARCHAR(500)
+    )";
+    
+    if ($conn->query($createTable)) {
+        // Retry fetching products after table creation
+        $stmt = $conn->prepare("SELECT * FROM Products");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $products = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+    }
+}
 
 ?>
 
@@ -101,10 +129,23 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
             <?php else: ?>
                 <?php foreach($products as $p): ?>
                     <div class="product-card" data-category="<?php echo htmlspecialchars($p['category']); ?>">
-                        <img src="<?php echo htmlspecialchars($p['image_url']); ?>" 
-                             alt="<?php echo htmlspecialchars($p['productName']); ?>"
-                             onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
-                        <h3><?php echo htmlspecialchars($p['productName']); ?></h3>
+                        <?php
+                        // Ensure product always has an image
+                        $imageUrl = htmlspecialchars($p['image_url']);
+                        $productName = htmlspecialchars($p['productName']);
+                        $category = htmlspecialchars($p['category']);
+                        
+                        // If image is empty or placeholder, use Unsplash
+                        if (empty($imageUrl) || strpos($imageUrl, 'placeholder.com') !== false) {
+                            $searchTerm = urlencode(strtolower($productName . ' ' . $category . ' product'));
+                            $imageUrl = "https://source.unsplash.com/400x300/?product,grocery," . $searchTerm;
+                        }
+                        ?>
+                        <img src="<?php echo $imageUrl; ?>" 
+                             alt="<?php echo $productName; ?>"
+                             loading="lazy"
+                             onerror="this.onerror=null; this.src='https://source.unsplash.com/400x300/?product,grocery,<?php echo urlencode(strtolower($productName)); ?>';">
+                        <h3><?php echo $productName; ?></h3>
                         <p>GHS <?php echo number_format($p['price'], 2); ?></p>
                         <button class="btn" onclick="addToCart(<?php echo $p['productID']; ?>, '<?php echo htmlspecialchars($p['productName'], ENT_QUOTES); ?>', <?php echo $p['price']; ?>)">
                             Add to Cart
