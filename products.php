@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['user_id']) || ($_SESSION['user_type'] ?? '') !== 'customer'){
+if(!isset($_SESSION['user_id']) || ($_SESSION['usertype'] ?? '') !== 'customer'){
     header("location:signup.php");
 }
 require_once 'connection.php';
@@ -79,7 +79,7 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
         <ul class="nav-links">
             <li><a href="index.php">Home</a></li>
             <li><a href="checkoutCart.php">Cart (<span id="cart-count">0</span>)</a></li>
-            <li><a href="login.php">Logout</a></li>
+            <li><a href="staff_logout.php">Logout</a></li>
         </ul>
     </nav>
 
@@ -168,5 +168,8 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
 
         window.onload = updateCartCount;
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script  src="staff_logout.js" defer></script>
 </body>
 </html>

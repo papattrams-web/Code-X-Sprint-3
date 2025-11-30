@@ -55,7 +55,6 @@
 
     <!-- SweetAlert library for nice popup messages -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Our custom JavaScript that handles the login logic -->
     <script  src="login.js" defer></script>
 
 </body>
