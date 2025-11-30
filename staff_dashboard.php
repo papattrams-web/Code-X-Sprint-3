@@ -18,16 +18,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $info = $_POST['info'];
 
     // Image Upload
-    $target_dir = "uploads/";
-    $file_name = basename($_FILES["image"]["name"]);
-    $target_file = $target_dir . time() . "_" . $file_name; // Unique name
+$target_dir = "uploads/";
+$file_name = basename($_FILES["image"]["name"]);
+$target_file = $target_dir . $file_name; 
 
+if(file_exists($target_file)) {
+    $msg = "File already exists. Please rename your image or use a different one.";
+} else {
     if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
         // Use proper MySQLi prepared statement
         $sql = "INSERT INTO Products (productName, info, price, quantity, category, image_url) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
         if ($stmt) {
-            $stmt->bind_param("ssdis", $name, $info, $price, $quantity, $category, $target_file);
+            $stmt->bind_param("ssdiss", $name, $info, $price, $quantity, $category, $target_file);
             if ($stmt->execute()) {
                 $msg = "Product Added Successfully!";
             } else {
@@ -40,6 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $msg = "Error uploading image.";
     }
+}
+
 }
 
 $conn->close();
@@ -98,38 +103,117 @@ $conn->close();
         .content-wrapper {
             margin-top: 80px;
         }
+
+        body {
+    background: #f3f7ff;
+    font-family: Arial, sans-serif;
+}
+
+.form-card {
+    background: white;
+    padding: 2rem;
+    max-width: 500px;
+    margin: 120px auto;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.15);
+}
+
+.form-card h1 {
+    color: #0d6efd;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #bcd0ff;
+    font-size: 14px;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: #0d6efd;
+    outline: none;
+    box-shadow: 0 0 4px rgba(13,110,253,0.3);
+}
+
+.file-label {
+    font-size: 14px;
+    margin-top: 10px;
+    color: #333;
+}
+
+.btn-primary {
+    background: #0d6efd;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.2s;
+}
+
+.btn-primary:hover {
+    background: #0b5ed7;
+}
+
+.msg {
+    background: #d1e7dd;
+    color: #0f5132;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
     </style>
 </head>
 <body>
     <nav>
         <div class="logo">Essentials - Staff</div>
         <ul class="nav-links">
-            <li><a href="staff_product_page.php">Products View</a></li>
-            <li><a href="logout.php">Logout</a></li>
+            <li><a href="homepage.html">Home</a></li>
+            <li><a href="staff_product_page.php">View Products</a></li>
+            <li><a href="staff_logout.php">Logout</a></li>
         </ul>
     </nav>
-<main class="container content-wrapper" style="padding-top: 2rem;">
-    <h1>Add New Product</h1>
-    <?php if($msg) echo "<p style='color: green;'>$msg</p>"; ?>
+    <main class="content-wrapper">
+    <div class="form-card">
+        <h1>Add New Product</h1>
 
-    <form method="POST" enctype="multipart/form-data" style="max-width: 500px; display: flex; flex-direction: column; gap: 1rem;">
-        <input type="text" name="productName" placeholder="Product Name" required style="padding: 10px;">
-        <textarea name="info" placeholder="Description" required style="padding: 10px;"></textarea>
-        <input type="number" step="0.01" name="price" placeholder="Price (GHS)" required style="padding: 10px;">
-        <input type="number" step="1" name="quantity" placeholder="Quantity" required style="padding: 10px;">
+        <?php if($msg) echo "<p class='msg'>$msg</p>"; ?>
 
-        <select name="category" required style="padding: 10px;">
-            <option value="Beverages">Drinks/Beverages</option>
-            <option value="Toiletries">Toiletries</option>
-            <option value="Snacks">Snacks</option>
-            <option value="Groceries">Groceries</option>
-        </select>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="text" name="productName" placeholder="Product Name" required>
 
-        <label>Product Image:</label>
-        <input type="file" name="image" required>
+            <textarea name="info" placeholder="Description" required></textarea>
 
-        <button type="submit" class="btn">Upload Product</button>
-    </form>
+            <input type="number" step="0.01" name="price" placeholder="Price (GHS)" required>
+
+            <input type="number" name="quantity" placeholder="Quantity" required>
+
+            <select name="category" required>
+                <option value="">Select Category</option>
+                <option value="Beverages">Beverages</option>
+                <option value="Snacks">Snacks</option>
+                <option value="Groceries">Groceries</option>
+                <option value="Toiletries">Toiletries</option>
+            </select>
+
+            <label class="file-label">Product Image</label>
+            <input type="file" name="image" required>
+
+            <button type="submit" class="btn-primary">Upload Product</button>
+        </form>
+    </div>
 </main>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script  src="staff_logout.js" defer></script>
 </body>
 </html>

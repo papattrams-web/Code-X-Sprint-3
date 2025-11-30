@@ -79,8 +79,8 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
     <nav>
         <div class="logo">Essentials - Staff</div>
         <ul class="nav-links">
-            <li><a href="staff_dashboard.php">List Product</a></li>
-            <li><a href="logout.php">Logout</a></li>
+            <li><a href="staff_dashboard.php">Add Product</a></li>
+            <li><a href="staff_logout.php">Logout</a></li>
         </ul>
     </nav>
 
@@ -152,5 +152,8 @@ async function updateProduct(productId) {
     }
 }
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script  src="staff_logout.js" defer></script>
 </body>
 </html>
