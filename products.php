@@ -70,6 +70,8 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
     </style>
 </head>
 
+
+
 <body>
     <!-- Navigation bar matching homepage style -->
     <nav>
