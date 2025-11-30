@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+:root{
+    --accent-color:  #0d6efd;
+    --base-color:white;
+    --text-color:black;
+    --input-color: #dee4ec;
+}
+
+*{
+    margin:0;
+    padding:0;
+}
+
+html{
+    font-family: Poppins, Segoe UI, sans-serif;
+    font-size:12pt ;
+    color:var(--text-color);
+    text-align: center;
+}
+
+body{
+    min-height: 100vh;
+    background-size: cover;
+    background-position: right;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body::before{
+    content: "";
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background: #0d6efd;
+   /* opacity: 0.5;*/
+    z-index: -1;
+}
+
+.wrapper{
+    background: white;
+    padding: 40px;
+    box-shadow : 0 4px 30px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+
+/*figure out your the styling and positioning for the form item*/
+h1{
+    font-size: 3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+form{
+    width : min(400px,100%);
+    margin-top: 20px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+    
+
+form > div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+
+form label {
+    flex-shrink:0 ;
+    height: 50px;
+    width:50px;
+    background-color: var(--accent-color);
+    fill : var(--base-color);
+    color : var(--base-color);
+    border-radius: 10px 0 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+form input{
+    box-sizing: border-box;
+    flex-grow: 1;
+    min-width: none;
+    height: 50px;
+    padding:1em;
+    font:inherit;
+    border-radius: 0 10px 10px 0;
+    border: 2px solid var(--input-color);
+    background-color:var(--input-color);
+    transition: 150ms ease-in-out;
+
+}
+
+form input:hover{
+    border-color: var(--accent-color);
+}
+
+form input:focus{
+    outline: none;
+    border-color: var(--accent-color);
+     box-shadow: 0 0 5px var(--accent-color); 
+}
+
+form button{
+    margin-top: 10px;
+    border: none;
+    border-radius: 1000px;
+    padding :.85em 4em;
+    background-color: var(--accent-color);
+    color: var(--base-color);
+    font:inherit;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 150ms ease-in-out;
+}
+
+form button:hover{
+    background-color: var(--text-color);
+}
+
+a{
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+@media(max-width: 1100px){
+    .wrapper{
+        width: min(600px,100%);
+        border-radius: 0;
+        
+    }
+}
+
+form div.incorrect label {
+    background-color: rgba(160, 6, 6, 0.5);
+ }
+
+form div.incorrect input {
+    border-color: rgba(160, 6, 6, 0.5);
+} 
+
+#error-message {
+  
+    display: none;
+    color: rgba(160, 6, 6, 0.5);
+    margin-bottom: 20px;
+    background-color: #f0ebff;
+    width: 100%; /* Takes 100% of form width */
+    border: 3px solid  rgba(160, 6, 6, 0.5);
+    border-radius: 12px;
+    padding: 15px 20px;
+    line-height: 1.6;
+    box-sizing: border-box;
+}
+ 
+
+/*  checkbox styling */
+
+/* Target only labels inside the checkbox row */
+.checkbox-row label {
+    background: none; /* remove blue background */
+    color: var(--text-color); /* normal text color */
+    width: auto; /* remove fixed 50px width */
+    height: auto;
+    border-radius: 0;
+    display: inline-block;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin:0;
+    padding: 0;
+}
+
+.checkbox-row input[type="checkbox"] {
+   /* width: 20px;*/
+    height: 20px;
+    
+    margin: 0;
+}
+
+.checkbox-row label {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+/* --- Remember Me Styling --- */
+
+.remember-me-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Aligns content to the left */
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 0 10px; /* Gives a little horizontal padding */
+    gap: 10px; /* Space between the checkbox and the label text */
+}
+
+.remember-me-container input[type="checkbox"] {
+    /* Hide the default browser checkbox */
+    opacity: 0;
+    position: absolute;
+    width: 0;
+    height: 0;
+    pointer-events: none; 
+}
+
+.remember-me-container label {
+    /* Style the label to look like a checkbox and its text */
+    
+    flex-shrink: unset; /* Override form label styling */
+    width: auto; /* Override form label styling */
+    height: auto; /* Override form label styling */
+    padding-left: 30px; /* Space for the custom box */
+    position: relative;
+    background-color: transparent; /* Override form label styling */
+    color: var(--text-color);
+    fill: none;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 0; /* Override form label styling */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.remember-me-container label::before {
+    /* The custom box */
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--accent-color);
+    border-radius: 4px;
+    background-color: var(--input-color); 
+    transition: all 150ms ease-in-out;
+}
+
+.remember-me-container label::after {
+    /* The checkmark (hidden by default) */
+    content: '✓';
+    position: absolute;
+    left: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1;
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+}
+
+/* State when the checkbox is CHECKED */
+.remember-me-container input[type="checkbox"]:checked + label::before {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.remember-me-container input[type="checkbox"]:checked + label::after {
+    opacity: 1;
+    color: var(--base-color); /* Checkmark color is white against the red box */
+}
