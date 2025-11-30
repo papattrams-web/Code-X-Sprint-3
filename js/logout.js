@@ -1,4 +1,4 @@
-document.querySelector('a[href="staff_logout.php"]').addEventListener('click', async function(e) {
+document.querySelector('a[href="../php/logout.php"]').addEventListener('click', async function(e) {
     e.preventDefault(); // prevent default navigation
 
     // SweetAlert confirmation
@@ -33,7 +33,7 @@ document.querySelector('a[href="staff_logout.php"]').addEventListener('click', a
                     timer: 1500,
                     showConfirmButton: false
                 });
-                window.location.href = "login.php";
+                window.location.href = "../Views/login.php";
             } else {
                 Swal.fire('Error', 'Logout failed. Please try again.', 'error');
             }

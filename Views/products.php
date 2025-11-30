@@ -3,7 +3,7 @@ session_start();
 if(!isset($_SESSION['user_id']) || ($_SESSION['usertype'] ?? '') !== 'customer'){
     header("location:signup.php");
 }
-require_once 'connection.php';
+require_once '../php/connection.php';
 
 // Fetch products using MySQLi (not PDO)
 $stmt = $conn->prepare("SELECT * FROM Products");
@@ -18,7 +18,7 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
 <html lang="en">
 <head>
     <title>Store - Essentials</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="../css/main.css">
     <style>
         /* Updated navigation bar matching homepage style */
         nav {
@@ -77,9 +77,9 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
     <nav>
         <div class="logo">Essentials</div>
         <ul class="nav-links">
-            <li><a href="index.php">Home</a></li>
+            <li><a href="../index.php">Home</a></li>
             <li><a href="checkoutCart.php">Cart (<span id="cart-count">0</span>)</a></li>
-            <li><a href="staff_logout.php">Logout</a></li>
+            <li><a href="../php/logout.php">Logout</a></li>
         </ul>
     </nav>
 
