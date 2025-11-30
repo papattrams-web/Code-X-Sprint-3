@@ -330,14 +330,11 @@ Potential improvements for future versions:
 - Admin dashboard with analytics
 - Product reviews and ratings
 
-## License
 
-This project is part of Code-X Sprint 3.
+## Authors
 
-## Author
-
-Developed as part of Code-X Sprint 3 project.
+Developed as part of  CodeX Team Project.
 
 ---
 
-**Note**: This is a development project. For production use, ensure proper security measures, error handling, and database optimization are implemented.
+**Note**: This is a small scale project. For production use, ensure proper security measures, error handling, and database optimization would be implemented.
