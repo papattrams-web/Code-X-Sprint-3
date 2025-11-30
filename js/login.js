@@ -13,7 +13,7 @@ document.getElementById("login-button").addEventListener("click", async function
 
     //sends data to the login.php file
     try {
-        let response = await fetch("login_logic.php", {
+        let response = await fetch("../php/login_logic.php", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "same-origin",

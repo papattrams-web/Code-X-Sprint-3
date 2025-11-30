@@ -34,7 +34,7 @@ async function Validate(event){
 
     try {
         // sends data to SignUp.php file 
-        let response = await fetch("signup_logic.php", {
+        let response = await fetch("../php/signup_logic.php", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

@@ -53,7 +53,7 @@ if (password_verify($input_password, $hash)) {
     $_SESSION['username'] = $first_name . " " . $last_name;
     $_SESSION['usertype']=$user_type;
 
-    $redirect=($user_type==='staff')?"staff_dashboard.php":"products.php";
+    $redirect=($user_type==='staff')?"../Views/staff_dashboard.php":"../Views/products.php";
 
     if ($remember) {
         // set cookie for 30 days

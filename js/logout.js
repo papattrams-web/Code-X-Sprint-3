@@ -15,7 +15,7 @@ document.querySelector('a[href="staff_logout.php"]').addEventListener('click', a
 
     if (result.isConfirmed) {
         try {
-            let response = await fetch("staff_logout.php", {
+            let response = await fetch("../php/logout.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "same-origin",
