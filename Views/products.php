@@ -101,7 +101,7 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
             <?php else: ?>
                 <?php foreach($products as $p): ?>
                     <div class="product-card" data-category="<?php echo htmlspecialchars($p['category']); ?>">
-                        <img src="<?php echo htmlspecialchars($p['image_url']); ?>" 
+                        <img src="../<?php echo htmlspecialchars($p['image_url']); ?>" 
                              alt="<?php echo htmlspecialchars($p['productName']); ?>"
                              onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
                         <h3><?php echo htmlspecialchars($p['productName']); ?></h3>
@@ -170,6 +170,6 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script  src="staff_logout.js" defer></script>
+    <script  src="../js/logout.js" defer></script>
 </body>
 </html>

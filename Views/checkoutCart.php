@@ -73,7 +73,7 @@ if (!isset($_SESSION['user_id'])) {
         <ul class="nav-links">
             <li><a href="products.php">Back to Store</a></li>
             <li><a href="../index.php">Home</a></li>
-            <li><a href="logout.php">Logout</a></li>
+            <li><a href="../php/logout.php">Logout</a></li>
         </ul>
     </nav>
 
