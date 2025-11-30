@@ -92,7 +92,6 @@ if (!isset($_SESSION['user_id'])) {
     </div>
 
     <script>
-        // Load Cart on Page Load
         window.onload = function() {
             renderCart();
         };
@@ -104,8 +103,6 @@ if (!isset($_SESSION['user_id'])) {
             
             container.innerHTML = '';
             let total = 0;
-
-            // Get cart from localStorage (JSON format)
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
             if (cart.length === 0) {
@@ -114,7 +111,6 @@ if (!isset($_SESSION['user_id'])) {
                 return;
             }
 
-            // Loop through cart items
             cart.forEach((item, index) => {
                 let itemTotal = parseFloat(item.price) * parseInt(item.quantity);
                 total += itemTotal;
@@ -147,41 +143,36 @@ if (!isset($_SESSION['user_id'])) {
 
         async function processCheckout() {
             const btn = document.querySelector('#cart-footer button');
-            btn.textContent = "Processing...";
+            btn.textContent = "Loading Paystack...";
             btn.disabled = true;
 
-            // Get cart data
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
             if (cart.length === 0) {
                 alert("Cart is empty!");
-                btn.disabled = false;
-                btn.textContent = "Confirm & Pay";
                 return;
             }
 
-            // Send to backend
             try {
-                let response = await fetch('process_order.php', {
+                // 1. Send Cart to Backend to Initialize Transaction
+                let response = await fetch('initialize_paystack.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ cart: cart })
+                    body: JSON.stringify({ cart: cart }) // Send cart data
                 });
 
                 let result = await response.json();
 
-                if (result.success) {
-                    alert('Order placed successfully!');
-                    localStorage.removeItem('cart');
-                    window.location.href = 'products.php';
+                if (result.status && result.data.authorization_url) {
+                    // 2. Redirect user to Paystack Payment Page
+                    window.location.href = result.data.authorization_url;
                 } else {
-                    alert("Order Failed: " + result.message);
+                    alert("Payment Initialization Failed: " + (result.message || "Unknown error"));
                     btn.disabled = false;
                     btn.textContent = "Confirm & Pay";
                 }
             } catch (error) {
                 console.error(error);
-                alert("Network Error");
+                alert("Network Error: Could not connect to payment server.");
                 btn.disabled = false;
                 btn.textContent = "Confirm & Pay";
             }
