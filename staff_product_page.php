@@ -95,23 +95,8 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
 <div class="product-grid">
     <?php foreach($products as $p): ?>
         <div class="product-card" data-category="<?php echo htmlspecialchars($p['category']); ?>">
-            <?php
-            // Ensure product always has an image
-            $imageUrl = htmlspecialchars($p['image_url']);
-            $productName = htmlspecialchars($p['productName']);
-            $category = htmlspecialchars($p['category']);
-            
-            // If image is empty or placeholder, use Unsplash
-            if (empty($imageUrl) || strpos($imageUrl, 'placeholder.com') !== false) {
-                $searchTerm = urlencode(strtolower($productName . ' ' . $category . ' product'));
-                $imageUrl = "https://source.unsplash.com/400x300/?product,grocery," . $searchTerm;
-            }
-            ?>
-            <img src="<?php echo $imageUrl; ?>" 
-                 alt="<?php echo $productName; ?>"
-                 loading="lazy"
-                 onerror="this.onerror=null; this.src='https://source.unsplash.com/400x300/?product,grocery,<?php echo urlencode(strtolower($productName)); ?>';">
-            <h3><?php echo $productName; ?></h3>
+            <img src="<?php echo htmlspecialchars($p['image_url']); ?>" alt="Product">
+            <h3><?php echo htmlspecialchars($p['productName']); ?></h3>
             <p>GHS <?php echo number_format($p['price'], 2); ?></p>
             <p id="display_qty_<?php echo $p['productID']; ?>" style="font-weight:bold; color:#0d6efd;">
                 Available: <?php echo $p['quantity']; ?>
