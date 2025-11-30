@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Login Page</title>
     <!-- Using the authentication stylesheet which has the blue background and form styling -->
-    <link rel="stylesheet" href="loginandsignup.css">
+    <link rel="stylesheet" href="../css/loginandsignup.css">
    
 </head>
 <body>
@@ -55,7 +55,7 @@
 
     <!-- SweetAlert library for nice popup messages -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script  src="login.js" defer></script>
+    <script  src="../js/login.js" defer></script>
 
 </body>
 </html>

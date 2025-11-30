@@ -1,6 +1,6 @@
 <?php
 // Redirect to homepage
-header("Location: homepage.html");
+header("Location: Views/homepage.html");
 exit();
 ?>
 

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Register Page</title>
     <!-- Same styling as login page - blue background with white form card -->
-    <link rel="stylesheet" href="authentication.css">
+    <link rel="stylesheet" href="../css/loginandsignup.css">
     
 </head>
 
