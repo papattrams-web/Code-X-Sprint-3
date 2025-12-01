@@ -1,6 +1,14 @@
-# Essentials - Convenience Store E-Commerce Platform
+# Essentials by CodeX - Convenience Store E-Commerce Platform
 
 A modern web-based e-commerce platform for convenience store products, built with PHP, MySQL, and JavaScript. This application allows customers to browse and purchase groceries, beverages, snacks, and toiletries, while staff members can manage products and inventory.
+
+##  Essentials e-commerce app link using Wix CMS
+ live site: https://josephineallan369.wixsite.com/my-site-4
+
+## Project Files
+All supporting files can be found in the `Web Documentation` folder:
+- Case Scenario
+- Storyboard
 
 ## Features
 
@@ -55,29 +63,9 @@ Code-X-Sprint-3/
 
 ## Database Setup
 
-### Database Configuration
-- **Database Name**: `essentials`
-- **Host**: `localhost`
-- **Username**: `root`
-- **Password**: (empty by default)
 
-### Database Schema
-
-The application uses a `Products` table with the following structure:
-- `productID` (Primary Key)
-- `productName`
-- `info` (Description)
-- `price`
-- `quantity`
-- `category` (Beverages, Snacks, Toiletries, Groceries)
-- `image_url`
 
 ### Creating the Database
-
-1. Start XAMPP and ensure MySQL is running
-2. Open phpMyAdmin (http://localhost/phpmyadmin)
-3. Create a new database named `essentials`
-4. Create the Products table:
 
 ```sql
 CREATE TABLE Products (
@@ -89,6 +77,36 @@ CREATE TABLE Products (
     category VARCHAR(50) NOT NULL,
     image_url VARCHAR(500)
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ```
 
 ## Installation & Setup
