@@ -1,6 +1,6 @@
-# Essentials by CodeX - Convenience Store E-Commerce Platform
+# Essentials by CodeX
 
-A modern web-based e-commerce platform for convenience store products, built with PHP, MySQL, and JavaScript. This application allows customers to browse and purchase groceries, beverages, snacks, and toiletries, while staff members can manage products and inventory.
+A web-based e-commerce platform for convenience store products, built with PHP, MySQL, and JavaScript. This application allows customers to browse and purchase groceries, beverages, snacks, and toiletries, while staff members can manage products and inventory.
 
 ##  Essentials e-commerce app link using Wix CMS
  live site: https://josephineallan369.wixsite.com/my-site-4
