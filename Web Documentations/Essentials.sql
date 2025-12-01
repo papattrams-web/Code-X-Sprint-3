@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS essentials;
+-- CREATE DATABASE IF NOT EXISTS essentials;--
 USE essentials;
 
 
