@@ -180,5 +180,6 @@ if (!isset($_SESSION['user_id'])) {
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script  src="../js/logout.js" defer></script>
+    
 </body>
 </html>
