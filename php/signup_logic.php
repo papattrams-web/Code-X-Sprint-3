@@ -1,5 +1,7 @@
 <?php
+
 session_start();
+
 // Set JSON header
 header("Content-Type: application/json");
 

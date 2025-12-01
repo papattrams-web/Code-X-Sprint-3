@@ -1,5 +1,8 @@
 <?php
 session_start();
+var_dump($_SESSION);
+exit;
+
 if(!isset($_SESSION['user_id']) || ($_SESSION['usertype'] ?? '') !== 'customer'){
     header("location:signup.php");
 }
