@@ -16,12 +16,10 @@ All supporting files can be found in the `Web Documentation` folder:
 - **Browse Products**: View all available products with images and prices
 - **Product Filtering**: Filter products by category (Beverages, Snacks, Toiletries, Groceries)
 - **Shopping Cart**: Add products to cart with localStorage persistence
-- **Product Images**: Automatic image generation using Unsplash API for products without uploaded images
 - **Responsive Design**: Modern, mobile-friendly interface
 
 ### Staff Features
 - **Add Products**: Upload new products with images, prices, and descriptions
-- **Bulk Product Insertion**: Add 50+ convenience store products at once with automatic image generation
 - **Manage Inventory**: Update product quantities in real-time
 - **View All Products**: See all products with current stock levels
 
