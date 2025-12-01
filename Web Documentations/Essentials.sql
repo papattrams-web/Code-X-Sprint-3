@@ -1,5 +1,5 @@
 --CREATE DATABASE IF NOT EXISTS essentials;--
-USE essentials;
+--USE essentials;--
 
 
 -- USERS TABLE (updated as requested) --
@@ -71,12 +71,11 @@ CREATE TABLE storeInventory (
 );
 
 
-insert into Users(firstName,lastName,email,acc_password,userType) values
+insert into Codex_Users(firstName,lastName,email,acc_password,userType) values
 ('David','Mensah','david.mensah@ashesi.edu.gh','$2y$10$qTLPVsdy4q1oKP5gxBuvMO3suPQKCbXD0.3G2r8YhY1fNE.xaeMZe','staff');
 
 
-select * from Users;
-
+select * from Codex_Users;
 -- INSERT PRODUCTS --
 
 INSERT INTO Products (productName, info, price, quantity, category, image_url) VALUES
