@@ -29,8 +29,6 @@ All supporting files can be found in the `Web Documentation` folder:
 - **Backend**: PHP (MySQLi)
 - **Database**: MySQL
 - **Frontend**: HTML5, CSS3, JavaScript
-- **Server**: XAMPP (Apache, MySQL, PHP)
-
 
 
 ## Usage Guide
@@ -45,11 +43,13 @@ All supporting files can be found in the `Web Documentation` folder:
 2. **Add to Cart**
    - Click "Add to Cart" on any product
    - View cart by clicking "Cart" in the navigation
-   - Cart persists using browser localStorage
+   - Remove from cart (optional)
+
 
 3. **Checkout**
-   - Proceed to checkout from the cart page
+   - Proceed to checkout and  from the cart page
    - Complete your order
+   
 
 ### For Staff
 
@@ -57,61 +57,23 @@ All supporting files can be found in the `Web Documentation` folder:
    - Log in as staff
    - Go to Staff Dashboard
    - Fill in product details
-   - Upload an image (optional - will auto-generate if not provided)
    - Click "Upload Product"
 
-2. **Bulk Add Products**
-   - Log in as staff
-   - Click "Add 50+ Products Now."
-   - This will add 50+ convenience store products with automatic images
 
-3. **Manage Inventory**
+2. **Manage Inventory**
    - Go to "Products View" from the staff dashboard
    - Update product quantities as needed
    - Changes are saved immediately
-
-## Product Categories
-- **Beverages**: Soft drinks, juices, water, energy drinks
-- **Snacks**: Chips, cookies, candy, nuts
-- **Groceries**: Canned goods, pasta, rice, condiments, cleaning supplies
-- **Toiletries**: Personal care items, soap, shampoo, toothpaste
-
-
 
 ## Security Features
 
 - Session-based authentication
 - Prepared statements for SQL queries (prevents SQL injection)
-- Input sanitization with `htmlspecialchars().`
 - Access control for staff-only pages
 
-## Browser Compatibility
-- Chrome (recommended)
-- Firefox
-- Edge
-- Safari
-
-
 ## Future Enhancements
-
-- User authentication for products page
 - Order history
 - Product search functionality
 - User reviews and ratings
 - Payment gateway integration
 - Admin dashboard with analytics
-
-## Support
-
-For issues or questions, please check:
-- Database connection settings in `connection.php`
-- XAMPP services are running
-- File permissions for uploads directory
-
-## License
-
-This project is part of Code-X Sprint 3.
-
----
-
-**Developed for Essentials Convenience Store**
