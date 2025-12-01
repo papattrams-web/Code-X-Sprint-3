@@ -1,9 +1,8 @@
 <?php
 session_start();
-var_dump($_SESSION);
-exit;
 
-if(!isset($_SESSION['user_id']) || ($_SESSION['usertype'] ?? '') !== 'customer'){
+
+if(!isset($_SESSION['user_id']) || ($_SESSION['user_type'] ?? '') !== 'customer'){
     header("location:signup.php");
 }
 require_once '../php/connection.php';
