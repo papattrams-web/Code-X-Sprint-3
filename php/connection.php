@@ -1,13 +1,6 @@
 <?php
 $env = parse_ini_file('./../env/connect.env');
 
-// $conn = new mysqli(
-//     $env['servername'],
-//     $env['username'],
-//     $env['password'],
-//     $env['dbname']
-//    );
-
 $conn= new mysqli(
     $env['host'],
     $env['user'],
@@ -15,10 +8,6 @@ $conn= new mysqli(
     $env['database']
 );
 
-
-//  
-
-//    $conn=new mysqli($servername,$username,$dbpassword,$dbname);
    
    // Check connection
    if ($conn->connect_error) {
