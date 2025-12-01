@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/connection.php'; // Include database connection
+require_once __DIR__ . '/../php/connection.php'; // Include database connection
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
@@ -62,7 +62,7 @@ $qr_content = json_encode($qr_content_data);
     <title>Order Confirmed</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css"> <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="stylesheet" href="../css/main.css"> <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         .confirmation-card { max-width: 600px; margin: 50px auto; background: white; padding: 40px; border-radius: 20px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         .detail-row { display: flex; justify-content: space-between; margin: 15px 0; border-bottom: 1px dashed #eee; padding-bottom: 10px; }

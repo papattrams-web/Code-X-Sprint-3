@@ -154,7 +154,7 @@ if (!isset($_SESSION['user_id'])) {
 
             try {
                 // 1. Send Cart to Backend to Initialize Transaction
-                let response = await fetch('initialize_paystack.php', {
+                let response = await fetch('../php/initialize_paystack.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ cart: cart }) // Send cart data

@@ -81,7 +81,7 @@ if ($response && $response['status'] && $response['data']['status'] === 'success
         $conn->commit();
         
         unset($_SESSION['temp_cart']); 
-        header("Location: checkout.php?order_id=" . $order_id . "&amount=" . $amount_paid);
+        header("Location: ../Views/checkout.php?order_id=" . $order_id . "&amount=" . $amount_paid);
         exit();
 
     } catch (Exception $e) {
@@ -90,7 +90,7 @@ if ($response && $response['status'] && $response['data']['status'] === 'success
     }
 
 } else {
-    header("Location: checkoutCart.php?msg=payment_failed");
+    header("Location: ../Views/checkoutCart.php?msg=payment_failed");
     exit();
 }
 ?>
