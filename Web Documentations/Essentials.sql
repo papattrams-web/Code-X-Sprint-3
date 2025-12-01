@@ -3,7 +3,7 @@ USE essentials;
 
 
 -- USERS TABLE (updated as requested) --
-CREATE TABLE Users (
+CREATE TABLE Codex_Users (
     userID INT AUTO_INCREMENT PRIMARY KEY,
     firstName VARCHAR(70) NOT NULL,
     lastName VARCHAR(70) NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE Orders (
     orderType ENUM('delivery', 'pickup') NOT NULL,
     totalExpense DECIMAL(10,2) NOT NULL,
     deliveryAddress TEXT,
-    FOREIGN KEY (userID) REFERENCES Users(userID)
+    FOREIGN KEY (userID) REFERENCES Codex_Users(userID)
 );
 
 
