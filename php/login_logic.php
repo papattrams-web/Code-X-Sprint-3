@@ -30,7 +30,7 @@ if ($conn->connect_error) {
 }
 
 //selecting userid,firstname,lastname and password from database
-$stmt = $conn->prepare("SELECT userID,firstName, lastName, acc_password,userType FROM codex_users WHERE TRIM(email)=?");
+$stmt = $conn->prepare("SELECT userID,firstName, lastName, acc_password,userType FROM Codex_Users WHERE TRIM(email)=?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 

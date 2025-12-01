@@ -35,7 +35,7 @@ if ($conn->connect_error) {
 }
 
 // Prepare and execute insert query
-$stmt = $conn->prepare("INSERT INTO codex_users (firstName, lastName,email, acc_password) VALUES (?, ?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO Codex_Users (firstName, lastName,email, acc_password) VALUES (?, ?, ?, ?)");
 $stmt->bind_param("ssss", $firstname, $lastname, $email, $h_password);
 
 if ($stmt->execute()) {
