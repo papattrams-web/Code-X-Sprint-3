@@ -32,7 +32,7 @@ async function Validate(event){
 
     } 
 
-    try {
+    // try {
         // sends data to SignUp.php file 
         let response = await fetch("../php/signup_logic.php", {
             method: "POST",
@@ -66,7 +66,7 @@ async function Validate(event){
             Swal.fire("Error", result.message, "error");
         }
 
-    } catch (error) {
-        Swal.fire("Error", "Server error occurred", "error");
-    }
+    // } catch (error) {
+    //     Swal.fire("Error", "Server error occurred", "error");
+    // }
 }

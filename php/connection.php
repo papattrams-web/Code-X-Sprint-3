@@ -1,20 +1,24 @@
 <?php
-/*$env = parse_ini_file(__DIR__ .'/../env/connect.env');
+$env = parse_ini_file('./../env/connect.env');
 
-$conn = new mysqli(
-    $env['servername'],
-    $env['username'],
+// $conn = new mysqli(
+//     $env['servername'],
+//     $env['username'],
+//     $env['password'],
+//     $env['dbname']
+//    );
+
+$conn= new mysqli(
+    $env['host'],
+    $env['user'],
     $env['password'],
-    $env['dbname']
-   );
+    $env['database']
+);
 
-   */
-   $servername="localhost";
-   $username="stephanie.klomegah";
-   $dbpassword="0549833478";
-   $dbname="webtech_2025A_stephanie_klomegah";
 
-   $conn=new mysqli($servername,$username,$dbpassword,$dbname);
+//  
+
+//    $conn=new mysqli($servername,$username,$dbpassword,$dbname);
    
    // Check connection
    if ($conn->connect_error) {

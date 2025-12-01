@@ -1,6 +1,7 @@
 <?php
-
 session_start();
+
+require_once "connection.php";
 
 // Set JSON header
 header("Content-Type: application/json");
