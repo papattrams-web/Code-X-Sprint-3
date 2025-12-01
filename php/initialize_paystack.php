@@ -1,7 +1,8 @@
 <?php
+session_start();
 // initialize_paystack.php
 require_once __DIR__ . '/connection.php';
-session_start();
+
 
 header('Content-Type: application/json');
 

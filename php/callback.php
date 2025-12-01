@@ -1,7 +1,9 @@
 <?php
+session_start();
+
 // callback.php
 require_once __DIR__ . '/connection.php';
-session_start();
+
 
 // --- CONFIGURATION ---
 $paystack_secret_key = "sk_test_b4ea7a38715b980df461f712bf5ac92423ffd6d3"; 
