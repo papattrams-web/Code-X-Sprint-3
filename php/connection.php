@@ -10,9 +10,9 @@ $conn = new mysqli(
 
    */
    $servername="localhost";
-   $username="root";
-   $dbpassword="";
-   $dbname="essentials";
+   $username="stephanie.klomegah";
+   $dbpassword="0549833478";
+   $dbname="webtech_2025A_stephanie_klomegah";
 
    $conn=new mysqli($servername,$username,$dbpassword,$dbname);
    
