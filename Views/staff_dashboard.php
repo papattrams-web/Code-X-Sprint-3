@@ -1,6 +1,6 @@
 <?php
 session_start(); // Start session at the top
-require_once 'connection.php';
+require_once '../php/connection.php';
 
 // Access Control: only allow staff
 if (!isset($_SESSION['user_id']) || ($_SESSION['usertype'] ?? '') !== 'staff') {
@@ -57,7 +57,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <title>Staff Dashboard</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="../css/main.css">
     <style>
         /* Updated navigation bar matching homepage style */
         nav {
@@ -182,7 +182,7 @@ input:focus, textarea:focus, select:focus {
         <ul class="nav-links">
             <li><a href="homepage.html">Home</a></li>
             <li><a href="staff_product_page.php">View Products</a></li>
-            <li><a href="staff_logout.php">Logout</a></li>
+            <li><a href="../php/logout.php">Logout</a></li>
         </ul>
     </nav>
     <main class="content-wrapper">

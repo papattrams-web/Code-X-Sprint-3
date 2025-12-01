@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once ('connection.php');
+require_once ('../php/connection.php');
 
 // Security: Ensure only staff can access
 if (!isset($_SESSION['user_id']) || $_SESSION['usertype'] !== 'staff') {
@@ -19,7 +19,7 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
 <head>
     <meta charset="UTF-8">
     <title>Store - Essentials (Staff)</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="../css/main.css">
     <style>
         /* Navigation bar */
         nav {
@@ -146,7 +146,7 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
     <div class="logo">Essentials - Staff</div>
     <ul class="nav-links">
         <li><a href="staff_dashboard.php">Add Product</a></li>
-        <li><a href="staff_logout.php">Logout</a></li>
+        <li><a href="../php/logout.php">Logout</a></li>
     </ul>
 </nav>
 
@@ -161,7 +161,7 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
     <div class="product-grid">
         <?php foreach($products as $p): ?>
         <div class="product-card" data-category="<?php echo htmlspecialchars($p['category']); ?>">
-            <img src="<?php echo htmlspecialchars($p['image_url']); ?>" alt="Product">
+            <img src="../<?php echo htmlspecialchars($p['image_url']); ?>" alt="Product">
             <h3><?php echo htmlspecialchars($p['productName']); ?></h3>
             <p>GHS <?php echo number_format($p['price'], 2); ?></p>
             <p id="display_qty_<?php echo $p['productID']; ?>" style="font-weight:bold; color:#0d6efd;">
@@ -205,7 +205,7 @@ async function updateProduct(productId) {
         form.append('productID', productId);
         form.append('quantity', newQty);
 
-        const res = await fetch('update_quantity.php', { method: 'POST', body: form });
+        const res = await fetch('../php/update_quantity.php', { method: 'POST', body: form });
         const data = await res.json();
 
         if (data.success) {
@@ -223,7 +223,7 @@ async function deleteProduct(productId, imageUrl) {
         form.append('productID', productId);
         form.append('imageUrl', imageUrl);
 
-        const res = await fetch('delete_product.php', { method: 'POST', body: form });
+        const res = await fetch('../php/delete_product.php', { method: 'POST', body: form });
         const data = await res.json();
 
         if (data.success) {
