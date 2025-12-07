@@ -2,7 +2,7 @@
 --USE essentials;--
 
 
--- USERS TABLE (updated as requested) --
+-- USERS TABLE --
 CREATE TABLE Codex_Users (
     userID INT AUTO_INCREMENT PRIMARY KEY,
     firstName VARCHAR(70) NOT NULL,
@@ -80,16 +80,14 @@ select * from Codex_Users;
 
 INSERT INTO Products (productName, info, price, quantity, category, image_url) VALUES
 -- Beverages
-('Coca Cola 500ml', 'Refreshing carbonated soft drink', 3.50, 50, 'Beverages', 'https://images.unsplash.com/photo-1554866585-cd94860890b7?w=400&h=300&fit=crop'),
+
 ('Sprite 500ml', 'Lemon-lime flavored soft drink', 3.50, 45, 'Beverages', 'images/sprite.jpg'),
-('Fanta Orange 500ml', 'Orange flavored carbonated drink', 3.50, 40, 'Beverages', 'https://images.unsplash.com/photo-1554866585-cd94860890b7?w=400&h=300&fit=crop'),
 ('Pepsi 500ml', 'Classic cola soft drink', 3.50, 35, 'Beverages', 'images/Pepsi.jpg'),
 ('Mineral Water 500ml', 'Pure drinking water', 2.00, 100, 'Beverages', 'images/water.jpg'),
 ('Orange Juice 1L', 'Fresh orange juice', 8.00, 30, 'Beverages', 'images/orange juice.jpg'),
 ('Apple Juice 1L', 'Sweet apple juice', 8.00, 25, 'Beverages', 'images/Apple Juice.jpg'),
-('Energy Drink', 'High energy drink', 5.00, 40, 'Beverages', 'https://images.unsplash.com/photo-1554866585-cd94860890b7?w=400&h=300&fit=crop'),
+('Energy Drink', 'High energy drink', 5.00, 40, 'Beverages', 'images/energy_drink.jpg'),
 ('Malt Drink', 'Nutritious malt beverage', 4.50, 30, 'Beverages', 'images/wheat_drink.jpg'),
-('Chocolate Drink', 'Rich chocolate flavored drink', 4.00, 35, 'Beverages', 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&h=300&fit=crop'),
 
 -- Snacks
 ('Potato Chips', 'Crispy potato chips', 4.50, 60, 'Snacks', 'homepageimages/chips.webp'),
@@ -97,7 +95,7 @@ INSERT INTO Products (productName, info, price, quantity, category, image_url) V
 ('Biscuits', 'Sweet biscuits', 3.00, 80, 'Snacks', 'images/biscuits.jpg'),
 ('Cookies', 'Chocolate cookies', 4.00, 70, 'Snacks', 'images/cookies.jpg'),
 ('Peanuts', 'Roasted peanuts', 3.50, 45, 'Snacks', 'images/Peanuts.jpg'),
-('Crackers', 'Salty crackers', 3.50, 55, 'Snacks', 'images/crackers.jpg'),
+('Crackers', 'Salty crackers', 3.50, 55, 'Snacks', 'images/crackers.jpg'),`
 ('Popcorn', 'Buttered popcorn', 4.00, 40, 'Snacks', 'images/popcorn.jpg'),
 ('Nuts Mix', 'Mixed nuts', 6.00, 35, 'Snacks', 'images/mixed nuts.jpg'),
 ('Chocolate Bar', 'Milk chocolate bar', 5.50, 50, 'Snacks', 'images/choco.jpeg'),
@@ -105,7 +103,6 @@ INSERT INTO Products (productName, info, price, quantity, category, image_url) V
 
 -- Groceries - Canned Goods
 ('Canned Beans', 'Canned baked beans', 6.50, 40, 'Groceries', 'images/canned beans.jpg'),
-('Canned Tomatoes', 'Canned diced tomatoes', 5.00, 35, 'Groceries', 'https://images.unsplash.com/photo-1588168333986-5078d3ae3976?w=400&h=300&fit=crop'),
 ('Canned Corn', 'Sweet corn in can', 5.50, 30, 'Groceries', 'images/canned corn.jpg'),
 ('Canned Sardines', 'Canned sardines in oil', 8.00, 25, 'Groceries', 'images/canned sardine.jpg'),
 ('Canned Tuna', 'Canned tuna fish', 9.00, 20, 'Groceries', 'images/canned tuna.jpg'),
@@ -113,8 +110,6 @@ INSERT INTO Products (productName, info, price, quantity, category, image_url) V
 -- Groceries - Packaged Foods
 ('Instant Noodles', 'Quick instant noodles', 3.50, 80, 'Groceries', 'images/buldak.jpg'),
 ('Pasta', 'Spaghetti pasta', 7.00, 45, 'Groceries', 'images/pasta.jpg'),
-('Rice 1kg', 'Long grain rice', 12.00, 50, 'Groceries', 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&h=300&fit=crop'),
-('Cereal', 'Breakfast cereal', 15.00, 30, 'Groceries', 'https://images.unsplash.com/photo-1526318896980-cf78c088247c?w=400&h=300&fit=crop'),
 ('Oats', 'Rolled oats', 10.00, 25, 'Groceries', 'images/oats.jpg'),
 ('Flour 1kg', 'All-purpose flour', 8.00, 40, 'Groceries', 'images/flour.jpg'),
 ('Sugar 1kg', 'Granulated sugar', 6.50, 50, 'Groceries', 'images/sugar.jpg'),
@@ -127,8 +122,6 @@ INSERT INTO Products (productName, info, price, quantity, category, image_url) V
 ('Mayonnaise', 'Creamy mayonnaise', 6.00, 35, 'Groceries', 'images/mayonnaise.jpg'),
 ('Hot Sauce', 'Spicy hot sauce', 4.50, 30, 'Groceries', 'images/hot sauce.jpg'),
 ('Soy Sauce', 'Light soy sauce', 5.00, 25, 'Groceries', 'images/soy sauce.jpg'),
-('Pepper', 'Black pepper', 3.00, 40, 'Groceries', 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&h=300&fit=crop'),
-('Curry Powder', 'Curry spice mix', 4.00, 30, 'Groceries', 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&h=300&fit=crop'),
 
 -- Toiletries
 ('Toothpaste', 'Fluoride toothpaste', 8.00, 50, 'Toiletries', 'images/toothpaste.jpg'),
