@@ -14,3 +14,4 @@ $conn= new mysqli(
     // Throw exception 
     throw new Exception("Connection failed: " . $conn->connect_error);
 }
+ 
