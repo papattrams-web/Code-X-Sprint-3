@@ -80,6 +80,7 @@ if ($response && $response['status'] && $response['data']['status'] === 'success
             $stmt_stock->execute();
         }
 
+        
         $conn->commit();
         
         unset($_SESSION['temp_cart']); 
