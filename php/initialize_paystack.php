@@ -32,7 +32,7 @@ $_SESSION['temp_cart'] = $data['cart'];
 
 // Retrieve user email
 $user_id = $_SESSION['user_id'];
-$query = "SELECT email FROM Users WHERE userID = ?";
+$query = "SELECT email FROM Codex_Users WHERE userID = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
