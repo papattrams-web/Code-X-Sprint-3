@@ -54,7 +54,7 @@ $amount_in_kobo = $total_amount * 100;
 $url = "https://api.paystack.co/transaction/initialize";
 
 // The callback_url is where Paystack returns the user after payment
-$callback_url = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . "checkout.php";
+$callback_url = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . "/callback.php";
 
 $fields = [
     'email' => $email,
