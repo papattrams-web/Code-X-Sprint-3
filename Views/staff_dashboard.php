@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $info = $_POST['info'];
 
     // Image Upload
-$target_dir = "uploads/";
+$target_dir = "../uploads/";
 $file_name = basename($_FILES["image"]["name"]);
 $target_file = $target_dir . $file_name; 
 
