@@ -26,7 +26,8 @@
                 <label for = "email-input">
                     <span>@</span> 
                 </label>
-                <input type ="email" required name ="email" id ="email-input" placeholder="Email" value="<?php echo htmlspecialchars($_COOKIE['user_email'] ?? ''); />
+                <input type="email" required name="email" id="email-input" placeholder="Email"
+                value="<?php echo htmlspecialchars($_COOKIE['user_email'] ?? ''); ?>" />
             </div>
 
             <!-- Password input field with lock icon in the blue label -->
@@ -40,7 +41,9 @@
 
             <!-- Remember me checkbox - lets users stay logged in -->
             <div class="remember-me-container">
-                <input type="checkbox" name="remember_me" id="remember-me-checkbox" />
+                <input type="checkbox" name="remember_me" id="remember-me-checkbox"
+                <?php if(isset($_COOKIE['user_email'])) echo 'checked'; ?> />
+                
                 <label for="remember-me-checkbox">Remember Me</label>
             </div>
             
