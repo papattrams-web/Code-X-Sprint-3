@@ -18,33 +18,67 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $info = $_POST['info'];
 
     // Image Upload
-$target_dir = "../uploads/";
-$file_name = basename($_FILES["image"]["name"]);
-$target_file = $target_dir . $file_name; 
+    $target_dir = "../uploads/";
+    $file_name = basename($_FILES["image"]["name"]);
+    $target_file = $target_dir . $file_name;
 
-if(file_exists($target_file)) {
-    $msg = "File already exists. Please rename your image or use a different one.";
-} else {
-    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-        // Use proper MySQLi prepared statement
-        $sql = "INSERT INTO Products (productName, info, price, quantity, category, image_url) VALUES (?, ?, ?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        if ($stmt) {
-            $stmt->bind_param("ssdiss", $name, $info, $price, $quantity, $category, $target_file);
-            if ($stmt->execute()) {
-                $msg = "Product Added Successfully!";
-            } else {
-                $msg = "Database error: " . $stmt->error;
-            }
-            $stmt->close();
-        } else {
-            $msg = "Database prepare error: " . $conn->error;
+    // 1. Check for upload errors
+    if ($_FILES['image']['error'] !== UPLOAD_ERR_OK) {
+        switch ($_FILES['image']['error']) {
+            case UPLOAD_ERR_INI_SIZE:
+            case UPLOAD_ERR_FORM_SIZE:
+                $msg = "File too large.";
+                break;
+            case UPLOAD_ERR_PARTIAL:
+                $msg = "File was only partially uploaded.";
+                break;
+            case UPLOAD_ERR_NO_FILE:
+                $msg = "No file was uploaded.";
+                break;
+            case UPLOAD_ERR_NO_TMP_DIR:
+                $msg = "Missing temporary folder.";
+                break;
+            case UPLOAD_ERR_CANT_WRITE:
+                $msg = "Failed to write file to disk.";
+                break;
+            case UPLOAD_ERR_EXTENSION:
+                $msg = "File upload stopped by extension.";
+                break;
+            default:
+                $msg = "Unknown upload error.";
         }
-    } else {
-        $msg = "Error uploading image.";
+    } 
+    // 2. Check if uploads folder is writable
+    elseif (!is_writable($target_dir)) {
+        $msg = "Uploads folder is not writable!";
+    } 
+    else {
+        // 3. Check if file already exists
+        if(file_exists($target_file)) {
+            $msg = "File already exists. Please rename your image or use a different one.";
+        } else {
+            // 4. Move uploaded file
+            if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                // Insert into database
+                $sql = "INSERT INTO Products (productName, info, price, quantity, category, image_url) VALUES (?, ?, ?, ?, ?, ?)";
+                $stmt = $conn->prepare($sql);
+                if ($stmt) {
+                    $stmt->bind_param("ssdiss", $name, $info, $price, $quantity, $category, $target_file);
+                    if ($stmt->execute()) {
+                        $msg = "Product Added Successfully!";
+                    } else {
+                        $msg = "Database error: " . $stmt->error;
+                    }
+                    $stmt->close();
+                } else {
+                    $msg = "Database prepare error: " . $conn->error;
+                }
+            } else {
+                // Detailed error for debugging
+                $msg = "Error uploading image: " . print_r(error_get_last(), true);
+            }
+        }
     }
-}
-
 }
 
 $conn->close();
