@@ -26,7 +26,7 @@
                 <label for = "email-input">
                     <span>@</span> 
                 </label>
-                <input type ="email" required name ="email" id ="email-input" placeholder="Email" />
+                <input type ="email" required name ="email" id ="email-input" placeholder="Email" value="<?php echo htmlspecialchars($_COOKIE['user_email'] ?? ''); />
             </div>
 
             <!-- Password input field with lock icon in the blue label -->
