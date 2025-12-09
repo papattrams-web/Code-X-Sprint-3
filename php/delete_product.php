@@ -19,8 +19,11 @@ if (!$productID) {
 }
 
 // Delete product image from server
-if ($imageUrl && file_exists($imageUrl)) {
-    unlink($imageUrl);
+if ($imageUrl) {
+    $filePath = __DIR__ . '/../' . $imageUrl; 
+    if (file_exists($filePath)) {
+        unlink($filePath);
+    }
 }
 
 // Delete product from database
