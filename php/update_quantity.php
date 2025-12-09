@@ -15,17 +15,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $qty = $_POST['quantity'] ?? null;
 
     if ($id && $qty !== null) {
-        // Using $conn from connection.php (assumes MySQLi)
-        $stmt = $conn->prepare("UPDATE Products SET quantity = ? WHERE productID = ?");
-        $stmt->bind_param("ii", $qty, $id);
+        if ($qty == 0) {
+            // 3a. Quantity is 0 → delete product and image
+            // First, get the image path from database
+            $stmt = $conn->prepare("SELECT image_url FROM Products WHERE productID = ?");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $stmt->bind_result($image_url);
+            if ($stmt->fetch()) {
+                // Delete image file if exists
+                if ($image_url && file_exists(__DIR__ . '/../' . $image_url)) {
+                    unlink(__DIR__ . '/../' . $image_url);
+                }
+            }
+            $stmt->close();
 
-        if ($stmt->execute()) {
-            echo json_encode(['success' => true]);
+            // Delete product from database
+            $stmtDel = $conn->prepare("DELETE FROM Products WHERE productID = ?");
+            $stmtDel->bind_param("i", $id);
+            if ($stmtDel->execute()) {
+                echo json_encode(['success' => true, 'message' => 'Product deleted because quantity is 0']);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Failed to delete product']);
+            }
+            $stmtDel->close();
+
         } else {
-            echo json_encode(['success' => false, 'message' => 'Database update failed']);
+            // 3b. Quantity > 0 → just update
+            $stmt = $conn->prepare("UPDATE Products SET quantity = ? WHERE productID = ?");
+            $stmt->bind_param("ii", $qty, $id);
+
+            if ($stmt->execute()) {
+                echo json_encode(['success' => true, 'message' => 'Quantity updated']);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Database update failed']);
+            }
+            $stmt->close();
         }
 
-        $stmt->close();
         $conn->close();
     } else {
         echo json_encode(['success' => false, 'message' => 'Invalid input']);
