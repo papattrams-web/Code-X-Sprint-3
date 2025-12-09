@@ -79,7 +79,7 @@ select * from Codex_Users;
 -- INSERT PRODUCTS --
 
 INSERT INTO Products (productName, info, price, quantity, category, image_url) VALUES
--- Beverages
+-- Beverages --
 
 ('Sprite 500ml', 'Lemon-lime flavored soft drink', 3.50, 45, 'Beverages', 'images/sprite.jpg'),
 ('Pepsi 500ml', 'Classic cola soft drink', 3.50, 35, 'Beverages', 'images/Pepsi.jpg'),
@@ -89,13 +89,14 @@ INSERT INTO Products (productName, info, price, quantity, category, image_url) V
 ('Energy Drink', 'High energy drink', 5.00, 40, 'Beverages', 'images/energy_drink.jpg'),
 ('Malt Drink', 'Nutritious malt beverage', 4.50, 30, 'Beverages', 'images/wheat_drink.jpg'),
 
--- Snacks
+-- Snacks--
+
 ('Potato Chips', 'Crispy potato chips', 4.50, 60, 'Snacks', 'homepageimages/chips.webp'),
 ('Plantain Chips', 'Local favorite plantain chips', 5.00, 50, 'Snacks', 'homepageimages/plantainchips.webp'),
 ('Biscuits', 'Sweet biscuits', 3.00, 80, 'Snacks', 'images/biscuits.jpg'),
 ('Cookies', 'Chocolate cookies', 4.00, 70, 'Snacks', 'images/cookies.jpg'),
 ('Peanuts', 'Roasted peanuts', 3.50, 45, 'Snacks', 'images/Peanuts.jpg'),
-('Crackers', 'Salty crackers', 3.50, 55, 'Snacks', 'images/crackers.jpg'),`
+('Crackers', 'Salty crackers', 3.50, 55, 'Snacks', 'images/crackers.jpg'),
 ('Popcorn', 'Buttered popcorn', 4.00, 40, 'Snacks', 'images/popcorn.jpg'),
 ('Nuts Mix', 'Mixed nuts', 6.00, 35, 'Snacks', 'images/mixed nuts.jpg'),
 ('Chocolate Bar', 'Milk chocolate bar', 5.50, 50, 'Snacks', 'images/choco.jpeg'),
